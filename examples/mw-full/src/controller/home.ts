@@ -1,9 +1,9 @@
-import { Controller, Get } from '@midwayjs/decorator';
+import { Controller, Get } from "@midwayjs/decorator";
 
-@Controller('/')
+@Controller("/")
 export class HomeController {
-  @Get('/')
+  @Get("/")
   async home() {
-    return 'Hello Midwayjs!';
+    return "Hello Midwayjs!";
   }
 }
