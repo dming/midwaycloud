@@ -1,0 +1,42 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "dist",
+    "sourceMap": true,
+    "target": "es2017",
+    "useDefineForClassFields": false,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "allowJs": false,
+    "strict": true,
+    "noUnusedLocals": true,
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "removeComments": false,
+    "jsx": "preserve",
+    "lib": [
+      "esnext",
+      "dom"
+    ],
+    "types": [
+      "jest",
+      "node"
+    ],
+    "rootDir": ".",
+    "paths": {
+      "@dming/midway-*": [
+        "packages/*/src"
+      ],
+      "midway": [
+        "packages/midway/src"
+      ]
+    }
+  },
+  "include": [
+    "packages/global.d.ts",
+    "packages/*/src",
+    "packages/*/__tests__",
+    "test-dts"
+  ]
+}
