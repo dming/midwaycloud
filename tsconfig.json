@@ -3,7 +3,7 @@
     "baseUrl": ".",
     "outDir": "dist",
     "sourceMap": true,
-    "target": "es2017",
+    "target": "es2018",
     "useDefineForClassFields": false,
     "module": "esnext",
     "moduleResolution": "node",
@@ -15,22 +15,12 @@
     "esModuleInterop": true,
     "removeComments": false,
     "jsx": "preserve",
-    "lib": [
-      "esnext",
-      "dom"
-    ],
-    "types": [
-      "jest",
-      "node"
-    ],
+    "lib": ["esnext", "dom"],
+    "types": ["jest", "node"],
     "rootDir": ".",
     "paths": {
-      "@dming/midway-*": [
-        "packages/*/src"
-      ],
-      "midway": [
-        "packages/midway/src"
-      ]
+      "@dming/midwaycloud-*": ["packages/*/src"],
+      "midwaycloud": ["packages/midwaycloud/src"]
     }
   },
   "include": [

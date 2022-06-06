@@ -1,6 +1,6 @@
 import { MidwayConfig, MidwayAppInfo } from "@midwayjs/core";
-import * as path from "path";
-import * as fs from "fs";
+// import * as path from "path";
+// import * as fs from "fs";
 
 export default (appInfo: MidwayAppInfo) => {
   return {
@@ -9,14 +9,15 @@ export default (appInfo: MidwayAppInfo) => {
 
     // 配置网站图标 可为网络图标
     siteFile: {
-      "/favicon.ico": fs.readFileSync(
-        path.join(__dirname, "../../favicon.ico")
-      ),
+      // "/favicon.ico": fs.readFileSync(
+      //   path.join(__dirname, "../../favicon.ico")
+      // ),
     },
 
     // jwt 密钥
     jwt: {
       secret: "INnyQ50BEE6AITQraIaDGooJ",
+      expiresIn: "12h", // https://github.com/vercel/ms
     },
 
     egg: {
