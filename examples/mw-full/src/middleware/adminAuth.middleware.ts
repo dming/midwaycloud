@@ -1,22 +1,63 @@
-import { Provide } from "@midwayjs/decorator";
-import { IMiddleware, IMidwayBaseApplication } from "@midwayjs/core";
+import { Inject, Provide } from "@midwayjs/decorator";
+import { IMiddleware } from "@midwayjs/core";
 import {
   Context as WebContext,
   NextFunction as WebNextFunction,
 } from "@midwayjs/web";
+import { JwtService } from "@midwayjs/jwt";
+import { isEmpty } from "lodash";
+import { Context } from "egg";
+import {
+  ADMIN_PREFIX_URL,
+  NOAUTH_PREFIX_URL,
+  Resp,
+  RespOp,
+} from "../controller/base";
+import { Token } from "../interface";
 
 @Provide()
 export class AdminAuthMiddleware
   implements IMiddleware<WebContext, WebNextFunction>
 {
-  resolve(app?: IMidwayBaseApplication<WebContext>) {
+  @Inject()
+  jwtService: JwtService;
+
+  //app?: IMidwayBaseApplication<WebContext>
+  resolve() {
     return async (ctx: WebContext, next: WebNextFunction) => {
       const url = ctx.url;
       console.log("AdminAuthMiddleware url ", url);
+      if (url.startsWith(`${ADMIN_PREFIX_URL}${NOAUTH_PREFIX_URL}`)) {
+        console.warn("ignore auth url : ", url);
+        await next();
+        return;
+      }
+
       // const path = url.split("?")[0];
-      // const token = ctx.get("Authorization");
-      next();
+      const token = ctx.get("Authorization");
+      console.log("AdminAuthMiddleware token ", token);
+      if (isEmpty(token)) {
+        // 无法通过token校验
+        this.reject(ctx, { code: 11001 });
+        return;
+      }
+      try {
+        // 挂载对象到当前请求上
+        ctx.admin = this.jwtService.verifySync(token, {}) as Token;
+        console.log("verify token %s to payload %j", token, ctx.admin);
+      } catch (e) {
+        // 无法通过token校验
+        this.reject(ctx, { code: 11001 });
+        return;
+      }
+      // pass
+      await next();
     };
+  }
+
+  private reject(ctx: Context, op: RespOp): void {
+    ctx.status = 200;
+    ctx.body = Resp(op);
   }
 
   // match?: (ctx?: Context<unknown>) => boolean;

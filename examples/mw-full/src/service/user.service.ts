@@ -57,4 +57,9 @@ export class UserService {
     );
     return jwtSign;
   }
+
+  async getUserInfo(id: number) {
+    const user = await this.userRepo.findOne({ where: { id: id } });
+    return user;
+  }
 }

@@ -14,6 +14,8 @@ export default (appInfo: MidwayAppInfo) => {
       // ),
     },
 
+    middleware: ["adminAuthMiddleware"],
+
     // jwt 密钥
     jwt: {
       secret: "INnyQ50BEE6AITQraIaDGooJ",

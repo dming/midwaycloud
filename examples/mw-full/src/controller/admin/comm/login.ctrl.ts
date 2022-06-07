@@ -11,13 +11,16 @@ import { CreateApiDoc } from "@midwayjs/swagger";
 import { Validate } from "@midwayjs/validate";
 import { isEmpty } from "lodash";
 import { LoginInfoDto } from "../../../dto/admin/verify.dto";
-import type { ResOp } from "../../../interface";
 import { UserService } from "../../../service/user.service";
-import { Res } from "../../../util/comm.util";
-import { ADMIN_PREFIX_URL, NOAUTH_PREFIX_URL } from "../../base";
+import {
+  ADMIN_PREFIX_URL,
+  NOAUTH_PREFIX_URL,
+  Resp,
+  RespResult,
+} from "../../base";
 
 @Provide()
-@Controller(`${ADMIN_PREFIX_URL}/${NOAUTH_PREFIX_URL}/`, {
+@Controller(`${ADMIN_PREFIX_URL}${NOAUTH_PREFIX_URL}/`, {
   tagName: "AdminLogin",
   description: "backend login controller",
 })
@@ -37,16 +40,16 @@ export class AdminLoginController {
     .build()
   @Post("/login")
   @Validate()
-  async login(@Body(ALL) loginInfo: LoginInfoDto): Promise<ResOp> {
+  async login(@Body(ALL) loginInfo: LoginInfoDto): Promise<RespResult> {
     const sign = await this.userService.getLoginSign(
       loginInfo.username,
       loginInfo.password
     );
 
     if (isEmpty(sign)) {
-      return { code: 10003 };
+      return Resp({ code: 10003 });
     }
-    return Res({
+    return Resp({
       data: { token: sign },
     });
   }

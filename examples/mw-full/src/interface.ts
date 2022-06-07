@@ -11,9 +11,12 @@ export interface IGetUserResponse {
   data: IUserOptions;
 }
 
-//////////////////////////////////////////////////////
-export interface ResOp {
-  data?: any;
-  code?: number;
-  message?: string;
+export interface Token {
+  uid: number;
+  pv: number;
+}
+declare module "egg" {
+  interface Context {
+    admin: Token;
+  }
 }
