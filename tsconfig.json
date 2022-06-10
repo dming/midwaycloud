@@ -8,25 +8,22 @@
     "module": "esnext",
     "moduleResolution": "node",
     "allowJs": false,
-    "strict": true,
+    // "strict": true,
     "noUnusedLocals": true,
     "experimentalDecorators": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "removeComments": false,
-    "jsx": "preserve",
-    "lib": ["esnext", "dom"],
-    "types": ["jest", "node"],
     "rootDir": ".",
     "paths": {
-      "@dming/midwaycloud-*": ["packages/*/src"],
+      "@dming/mwcloud-*": ["packages/mwcloud-*/src"],
       "midwaycloud": ["packages/midwaycloud/src"]
     }
   },
   "include": [
-    "packages/global.d.ts",
     "packages/*/src",
     "packages/*/__tests__",
-    "test-dts"
+    "examples/*/src",
+    "examples/*/test"
   ]
 }

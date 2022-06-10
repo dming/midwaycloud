@@ -8,6 +8,7 @@
     "@midwayjs/core": "^3.0.0",
     "@midwayjs/decorator": "^3.0.0",
     "@midwayjs/jwt": "^3.3.11",
+    "@midwayjs/logger": "^2.16.3",
     "@midwayjs/orm": "^3.3.6",
     "@midwayjs/redis": "^3.3.5",
     "@midwayjs/swagger": "^1.0.7",
@@ -23,11 +24,12 @@
     "mysql2": "^2.3.3",
     "svg-captcha": "^1.4.0",
     "swagger-ui-dist": "^3.45.1",
-    "typeorm": "^0.3.6"
+    "typeorm": "^0.3.6",
+    "@dming/mwcloud-casbin": "workspace:*"
   },
   "devDependencies": {
     "@midwayjs/cli": "^1.0.0",
-    "@midwayjs/egg-ts-helper": "^1.0.1",
+    "@midwayjs/egg-ts-helper": "^1.2.1",
     "@midwayjs/mock": "^3.0.0",
     "@types/crypto-js": "^4.1.1",
     "@types/ioredis": "^4.28.7",

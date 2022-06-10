@@ -13,11 +13,3 @@ run/
 *.un~
 .tsbuildinfo
 .tsbuildinfo.*
-# add
-docs
-.docker/
-.serverless
-.fun
-# pnpm-lock.yaml
-
-/__temp__
