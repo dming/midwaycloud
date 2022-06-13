@@ -1,4 +1,3 @@
-export const customKey = {
-  a: 1,
-  b: "hello",
-};
+// import { CasbinConfig } from "src/types";
+
+// export const casbin: CasbinConfig = {};

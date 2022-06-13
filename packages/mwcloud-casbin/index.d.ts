@@ -1,10 +1,13 @@
 export * from "./dist/index";
+import {
+  CasbinConfig,
+  CasbinConfigKey,
+  CasbinMiddlewareConfig,
+} from "./dist/index";
 
 declare module "@midwayjs/core/dist/interface" {
   interface MidwayConfig {
-    book?: PowerPartial<{
-      a: number;
-      b: string;
-    }>;
+    [CasbinConfigKey.config]?: CasbinConfig;
+    [CasbinConfigKey.middlewareConfig]?: CasbinMiddlewareConfig;
   }
 }
