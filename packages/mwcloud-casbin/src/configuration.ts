@@ -9,7 +9,7 @@ import { CasbinMiddlewareConfig } from "./types";
   namespace: `${CasbinConfigKey.namespace}`,
   importConfigs: [join(__dirname, "config")],
 })
-export class BookConfiguration {
+export class AutoConfiguration {
   @App() readonly app: IMidwayApplication;
 
   @Config(CasbinConfigKey.middlewareConfig)

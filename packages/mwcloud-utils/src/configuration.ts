@@ -7,7 +7,7 @@ import { UtilsKey } from "./constant";
   namespace: `${UtilsKey.namespace}`,
   importConfigs: [join(__dirname, "config")],
 })
-export class BookConfiguration {
+export class AutoConfiguration {
   @App() readonly app: IMidwayApplication;
 
   async onReady() {

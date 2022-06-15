@@ -2,7 +2,7 @@ import { Context, IMiddleware, NextFunction } from "@midwayjs/core";
 import { Config, Inject } from "@midwayjs/decorator";
 import { CasbinConfigKey } from "src/constant";
 import { CasbinService } from "src/service/casbin.service";
-import { PathToRegexpService } from "../../../mwcloud-utils/src/service/path2regexp.service";
+import { PathToRegexpService } from "@dming/mwcloud-utils";
 
 // @Middleware()
 export abstract class BaseCasbinMiddleware

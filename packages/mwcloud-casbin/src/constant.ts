@@ -1,8 +1,8 @@
 export enum CasbinConfigKey {
-  namespace = "casbin",
+  namespace = "mwcloud-casbin",
   config = "casbinConfig",
-  middlewareConfig = "middlewareConfig",
+  middlewareConfig = "casbinMiddlewareConfig",
   serviceName = "casbinService",
   middlewareName = "casbinMiddleware",
-  whitelist = "whitelist",
+  whitelist = "casbinWhitelist",
 }
