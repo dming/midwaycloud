@@ -46,4 +46,10 @@ export default {
       db: 0,
     },
   },
+
+  midwayLogger: {
+    default: {
+      consoleLevel: "info",
+    },
+  },
 } as MidwayConfig & DefaultConfig;

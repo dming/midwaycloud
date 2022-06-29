@@ -2,6 +2,7 @@
   "extends": "../../tsconfig",
   "compileOnSave": true,
   "compilerOptions": {
+    "baseUrl": ".",
     "target": "es2018",
     "module": "commonjs",
     "moduleResolution": "node",
@@ -16,6 +17,10 @@
     "declaration": true,
     "forceConsistentCasingInFileNames": true,
     "typeRoots": ["./typings", "./node_modules/@types"],
+    "paths": {
+      "@dming/mwcloud-*": ["../../packages/mwcloud-*/src"],
+      "midwaycloud": ["../../packages/midwaycloud/src"]
+    },
     "outDir": "dist"
   },
   "exclude": ["dist", "node_modules", "test"]

@@ -1,6 +1,12 @@
+import {
+  MoleculerConfigKey,
+  importMoleculerConfig,
+} from "@dming/mwcloud-moleculer";
 import { MidwayConfig, MidwayAppInfo } from "@midwayjs/core";
-// import * as path from "path";
-// import * as fs from "fs";
+
+const STYPE = process.env.MOLECULER_SERVICES || "default";
+const moleculerConf = importMoleculerConfig(STYPE, __dirname);
+console.log("[%s] moleculerConf is %j", STYPE, moleculerConf);
 
 export default (appInfo: MidwayAppInfo) => {
   return {
@@ -28,5 +34,7 @@ export default (appInfo: MidwayAppInfo) => {
     // security: {
     //   csrf: false,
     // },
+
+    [MoleculerConfigKey.config]: moleculerConf,
   } as MidwayConfig;
 };

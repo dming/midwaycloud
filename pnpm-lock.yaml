@@ -33,6 +33,8 @@ importers:
   examples/mw-full:
     specifiers:
       '@dming/mwcloud-casbin': workspace:*
+      '@dming/mwcloud-moleculer': workspace:*
+      '@dming/mwcloud-utils': workspace:*
       '@midwayjs/bootstrap': ^3.0.0
       '@midwayjs/cli': ^1.0.0
       '@midwayjs/core': ^3.0.0
@@ -62,6 +64,8 @@ importers:
       jest: ^26.4.0
       jsonwebtoken: ^8.5.1
       lodash: ^4.17.21
+      moleculer: ^0.14.21
+      moleculer-decorators: ^1.3.0
       mwts: ^1.0.5
       mysql2: ^2.3.3
       svg-captcha: ^1.4.0
@@ -71,6 +75,8 @@ importers:
       typescript: ~4.6.0
     dependencies:
       '@dming/mwcloud-casbin': link:../../packages/mwcloud-casbin
+      '@dming/mwcloud-moleculer': link:../../packages/mwcloud-moleculer
+      '@dming/mwcloud-utils': link:../../packages/mwcloud-utils
       '@midwayjs/bootstrap': registry.npmmirror.com/@midwayjs/bootstrap/3.3.9
       '@midwayjs/core': registry.npmmirror.com/@midwayjs/core/3.3.5_@midwayjs+decorator@3.3.4
       '@midwayjs/decorator': registry.npmmirror.com/@midwayjs/decorator/3.3.4
@@ -88,6 +94,8 @@ importers:
       egg-scripts: registry.npmmirror.com/egg-scripts/2.17.0
       jsonwebtoken: registry.npmmirror.com/jsonwebtoken/8.5.1
       lodash: registry.npmmirror.com/lodash/4.17.21
+      moleculer: registry.npmmirror.com/moleculer/0.14.21
+      moleculer-decorators: registry.npmmirror.com/moleculer-decorators/1.3.0
       mysql2: registry.npmmirror.com/mysql2/2.3.3
       svg-captcha: registry.npmmirror.com/svg-captcha/1.4.0
       swagger-ui-dist: registry.npmmirror.com/swagger-ui-dist/3.52.5
@@ -158,9 +166,6 @@ importers:
       mwts: ^1.3.0
       ts-jest: ^27.1.5
       typescript: ~4.6.4
-    dependencies:
-      moleculer: registry.npmmirror.com/moleculer/0.14.21
-      moleculer-decorators: registry.npmmirror.com/moleculer-decorators/1.3.0
     devDependencies:
       '@midwayjs/cli': registry.npmmirror.com/@midwayjs/cli/1.3.6_vi2gezghsfzxquykxerrmoruqq
       '@midwayjs/core': registry.npmmirror.com/@midwayjs/core/3.3.5_@midwayjs+decorator@3.3.4
@@ -171,6 +176,8 @@ importers:
       cross-env: registry.npmmirror.com/cross-env/6.0.3
       jest: registry.npmmirror.com/jest/27.5.1
       lodash: registry.npmmirror.com/lodash/4.17.21
+      moleculer: registry.npmmirror.com/moleculer/0.14.21
+      moleculer-decorators: registry.npmmirror.com/moleculer-decorators/1.3.0
       mwts: registry.npmmirror.com/mwts/1.3.0_typescript@4.6.4
       ts-jest: registry.npmmirror.com/ts-jest/27.1.5_awemid7uoas6fffeuhffpvpovm
       typescript: registry.npmmirror.com/typescript/4.6.4
@@ -1084,6 +1091,8 @@ packages:
       path-to-regexp: registry.npmmirror.com/path-to-regexp/1.8.0
       urijs: registry.npmmirror.com/urijs/1.19.11
       utility: registry.npmmirror.com/utility/1.17.0
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   registry.npmmirror.com/@eslint/eslintrc/0.4.3:
@@ -3465,7 +3474,6 @@ packages:
       chalk: registry.npmmirror.com/chalk/2.4.2
       leven: registry.npmmirror.com/leven/2.1.0
       mri: registry.npmmirror.com/mri/1.1.4
-    dev: false
 
   registry.npmmirror.com/arr-diff/4.0.0:
     resolution: {integrity: sha512-YVIQ82gZPGBebQV/a8dar4AitzCQs0jjXwMPZllpXMaGjXPYVUawSxQrRsjhjupyVxEvbHgUmIhKVlND+j02kA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/arr-diff/-/arr-diff-4.0.0.tgz}
@@ -3965,6 +3973,8 @@ packages:
       debug: registry.npmmirror.com/debug/3.2.7
       long: registry.npmmirror.com/long/4.0.0
       utility: registry.npmmirror.com/utility/1.17.0
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   registry.npmmirror.com/bytes/2.2.0:
@@ -4073,7 +4083,6 @@ packages:
     name: camelcase
     version: 5.0.0
     engines: {node: '>=6'}
-    dev: false
 
   registry.npmmirror.com/camelcase/5.3.1:
     resolution: {integrity: sha512-L28STB170nwWS63UjtlEOE3dldQApaJXZkOI1uMFfzf3rRuPegHaHesyee+YxQ+W6SvRDQV6UrdOdRiR153wJg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/camelcase/-/camelcase-5.3.1.tgz}
@@ -4912,6 +4921,11 @@ packages:
     resolution: {integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/debug/-/debug-3.2.7.tgz}
     name: debug
     version: 3.2.7
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
     dependencies:
       ms: registry.npmmirror.com/ms/2.1.3
 
@@ -5313,6 +5327,8 @@ packages:
       scmp: registry.npmmirror.com/scmp/2.1.0
       should-send-same-site-none: registry.npmmirror.com/should-send-same-site-none/2.0.5
       utility: registry.npmmirror.com/utility/1.17.0
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   registry.npmmirror.com/egg-core/4.23.0:
@@ -5369,6 +5385,8 @@ packages:
     dependencies:
       debug: registry.npmmirror.com/debug/3.2.7
       koa-locales: registry.npmmirror.com/koa-locales/1.12.0
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   registry.npmmirror.com/egg-jsonp/2.0.0:
@@ -5545,6 +5563,8 @@ packages:
     engines: {node: '>=8.0.0'}
     dependencies:
       koa-session: registry.npmmirror.com/koa-session/6.2.0
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   registry.npmmirror.com/egg-static/2.2.0:
@@ -5559,6 +5579,8 @@ packages:
       koa-static-cache: registry.npmmirror.com/koa-static-cache/5.1.4
       mkdirp: registry.npmmirror.com/mkdirp/0.5.6
       ylru: registry.npmmirror.com/ylru/1.3.2
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   registry.npmmirror.com/egg-utils/2.4.1:
@@ -5587,6 +5609,8 @@ packages:
       camelcase: registry.npmmirror.com/camelcase/5.3.1
       sdk-base: registry.npmmirror.com/sdk-base/3.6.0
       wt: registry.npmmirror.com/wt/1.2.0
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   registry.npmmirror.com/egg/2.35.0:
@@ -6201,7 +6225,6 @@ packages:
     resolution: {integrity: sha512-bXE7Dyc1i6oQElDG0jMRZJrRAn9QR2xyyFGmBdZleNmyQX0FqGYmhZIrIrpPfm/w//LTo4tVQGOGQcGCb5q9uw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/eventemitter2/-/eventemitter2-6.4.5.tgz}
     name: eventemitter2
     version: 6.4.5
-    dev: false
 
   registry.npmmirror.com/exec-sh/0.3.6:
     resolution: {integrity: sha512-nQn+hI3yp+oD0huYhKwvYI32+JFeq+XkNcD1GAo3Y/MjxsfVGmrrzrnzjWiNY6f+pUCP440fThsFh5gZrRAU/w==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/exec-sh/-/exec-sh-0.3.6.tgz}
@@ -6414,6 +6437,8 @@ packages:
       is-glob: registry.npmmirror.com/is-glob/4.0.3
       merge2: registry.npmmirror.com/merge2/1.4.1
       micromatch: registry.npmmirror.com/micromatch/3.1.10
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.npmmirror.com/fast-glob/3.2.11:
@@ -6449,7 +6474,6 @@ packages:
     resolution: {integrity: sha512-Qc7oCVO9hAPz5GUONmToIoa95YWzoe7SLsrjIXTfCFf6HFQXxxWePXe8D+Kp/XCrr5H/pMJwP2xprW07wYv/BQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/fastest-validator/-/fastest-validator-1.12.0.tgz}
     name: fastest-validator
     version: 1.12.0
-    dev: false
 
   registry.npmmirror.com/fastq/1.13.0:
     resolution: {integrity: sha512-YpkpUnK8od0o1hmeSc7UUs/eB/vIPWJYjKck2QKIzAf71Vm1AAQ3EbuZB3g2JIy+pg+ERD0vqI79KyZiB2e2Nw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/fastq/-/fastq-1.13.0.tgz}
@@ -7005,6 +7029,8 @@ packages:
       ignore: registry.npmmirror.com/ignore/4.0.6
       pify: registry.npmmirror.com/pify/4.0.1
       slash: registry.npmmirror.com/slash/2.0.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.npmmirror.com/got/9.6.0:
@@ -7484,7 +7510,6 @@ packages:
     name: ipaddr.js
     version: 2.0.1
     engines: {node: '>= 10'}
-    dev: false
 
   registry.npmmirror.com/is-accessor-descriptor/0.1.6:
     resolution: {integrity: sha512-e1BM1qnDbMRG3ll2U9dSK0UMHuWOs3pY3AtcFsmvwPtKL3MML/Q86i+GilLfvqEs4GW+ExB91tQ3Ig9noDIZ+A==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/is-accessor-descriptor/-/is-accessor-descriptor-0.1.6.tgz}
@@ -9445,12 +9470,11 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  registry.npmmirror.com/kleur/4.1.4:
-    resolution: {integrity: sha512-8QADVssbrFjivHWQU7KkMgptGTl6WAcSdlbBPY4uNF+mWr6DGcKrvY2w4FQJoXch7+fKMjj0dRrL75vk3k23OA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/kleur/-/kleur-4.1.4.tgz}
+  registry.npmmirror.com/kleur/4.1.5:
+    resolution: {integrity: sha512-o+NO+8WrRiQEE4/7nwRJhN1HWpVmJm511pBHUxPLtp0BUISzlBplORYSmTclCnJvQq2tKu/sgl3xVpkc7ZWuQQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/kleur/-/kleur-4.1.5.tgz}
     name: kleur
-    version: 4.1.4
+    version: 4.1.5
     engines: {node: '>=6'}
-    dev: false
 
   registry.npmmirror.com/ko-sleep/1.1.4:
     resolution: {integrity: sha512-s05WGpvvzyTuRlRE8fM7ru2Z3O+InbJuBcckTWKg2W+2c1k6SnFa3IfiSSt0/peFrlYAXgNoxuJWWVNmWh+K/A==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/ko-sleep/-/ko-sleep-1.1.4.tgz}
@@ -9517,6 +9541,8 @@ packages:
       humanize-ms: registry.npmmirror.com/humanize-ms/1.2.1
       ini: registry.npmmirror.com/ini/1.3.8
       object-assign: registry.npmmirror.com/object-assign/4.1.1
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   registry.npmmirror.com/koa-onerror/4.2.0:
@@ -9557,6 +9583,8 @@ packages:
       debug: registry.npmmirror.com/debug/3.2.7
       is-type-of: registry.npmmirror.com/is-type-of/1.2.1
       uuid: registry.npmmirror.com/uuid/3.4.0
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   registry.npmmirror.com/koa-static-cache/5.1.4:
@@ -9570,6 +9598,8 @@ packages:
       fs-readdir-recursive: registry.npmmirror.com/fs-readdir-recursive/1.1.0
       mime-types: registry.npmmirror.com/mime-types/2.1.35
       mz: registry.npmmirror.com/mz/2.7.0
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   registry.npmmirror.com/koa/2.13.4:
@@ -9623,7 +9653,6 @@ packages:
     name: leven
     version: 2.1.0
     engines: {node: '>=0.10.0'}
-    dev: false
 
   registry.npmmirror.com/leven/3.1.0:
     resolution: {integrity: sha512-qsda+H8jTaUaN/x5vzW2rzc+8Rw4TAQ/4KjB46IwK5VH+IlVeeeje/EoZRpiXvIqjFgK84QffqPztGI3VBLG1A==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/leven/-/leven-3.1.0.tgz}
@@ -10238,7 +10267,6 @@ packages:
       - rhea-promise
       - thrift
       - winston
-    dev: false
 
   registry.npmmirror.com/moleculer/0.14.21:
     resolution: {integrity: sha512-z+kIzbYl4uMNLaIKvsSugGLMorvppsali53GdkfSEHooR/5II59DI+EnW234mI2M/OWy/MxFzuGVfqDsWZkJ9g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/moleculer/-/moleculer-0.14.21.tgz}
@@ -10320,14 +10348,13 @@ packages:
       fastest-validator: registry.npmmirror.com/fastest-validator/1.12.0
       glob: registry.npmmirror.com/glob/7.2.3
       ipaddr.js: registry.npmmirror.com/ipaddr.js/2.0.1
-      kleur: registry.npmmirror.com/kleur/4.1.4
+      kleur: registry.npmmirror.com/kleur/4.1.5
       lodash: registry.npmmirror.com/lodash/4.17.21
       lru-cache: registry.npmmirror.com/lru-cache/6.0.0
       node-fetch: registry.npmmirror.com/node-fetch/2.6.7
       recursive-watch: registry.npmmirror.com/recursive-watch/1.1.4
     transitivePeerDependencies:
       - encoding
-    dev: false
 
   registry.npmmirror.com/moment-timezone/0.5.34:
     resolution: {integrity: sha512-3zAEHh2hKUs3EXLESx/wsgw6IQdusOT8Bxm3D9UrHPQR7zlMmzwybC8zHEM1tQ4LJwP7fcxrWr8tuBg05fFCbg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/moment-timezone/-/moment-timezone-0.5.34.tgz}
@@ -10348,7 +10375,6 @@ packages:
     name: mri
     version: 1.1.4
     engines: {node: '>=4'}
-    dev: false
 
   registry.npmmirror.com/ms/2.0.0:
     resolution: {integrity: sha512-Tpp60P6IUJDTuOq/5Z8cdskzJujfwqfOTkrwIwj7IRISpnkJnT6SyJ4PCPnGMoFjC9ddhal5KVIYtAt97ix05A==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/ms/-/ms-2.0.0.tgz}
@@ -11664,7 +11690,6 @@ packages:
     hasBin: true
     dependencies:
       ttl: registry.npmmirror.com/ttl/1.3.1
-    dev: false
 
   registry.npmmirror.com/redent/3.0.0:
     resolution: {integrity: sha512-6tDA8g98We0zd0GvVeMT9arEOnTw9qM03L9cJXaCjrip1OO764RDBLBfrB4cwzNGDj5OA5ioymC9GkizgWJDUg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/redent/-/redent-3.0.0.tgz}
@@ -12095,6 +12120,8 @@ packages:
       debug: registry.npmmirror.com/debug/3.2.7
       is-type-of: registry.npmmirror.com/is-type-of/1.2.1
       utility: registry.npmmirror.com/utility/1.17.0
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   registry.npmmirror.com/set-blocking/2.0.0:
@@ -12699,6 +12726,8 @@ packages:
       mime: registry.npmmirror.com/mime/1.6.0
       qs: registry.npmmirror.com/qs/6.10.3
       readable-stream: registry.npmmirror.com/readable-stream/2.3.7
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.npmmirror.com/superagent/7.1.6:
@@ -12730,6 +12759,8 @@ packages:
     dependencies:
       methods: registry.npmmirror.com/methods/1.1.2
       superagent: registry.npmmirror.com/superagent/3.8.3
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.npmmirror.com/supertest/6.2.2:
@@ -13349,7 +13380,6 @@ packages:
     resolution: {integrity: sha512-+bGy9iDAqg3WSfc2ZrprToSPJhZjqy7vUv9wupQzsiv+BVPVx1T2a6G4T0290SpQj+56Toaw9BiLO5j5Bd7QzA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/ttl/-/ttl-1.3.1.tgz}
     name: ttl
     version: 1.3.1
-    dev: false
 
   registry.npmmirror.com/type-check/0.3.2:
     resolution: {integrity: sha512-ZCmOJdvOWDBYJlzAoFkC+Q0+bUyEOS1ltgp1MGU03fqHG+dbi9tBFU2Rd9QKiDZFAYrhPh2JUf7rZRIuHRKtOg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/type-check/-/type-check-0.3.2.tgz}
@@ -14135,6 +14165,8 @@ packages:
       debug: registry.npmmirror.com/debug/2.6.9
       ndir: registry.npmmirror.com/ndir/0.1.5
       sdk-base: registry.npmmirror.com/sdk-base/2.0.1
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   registry.npmmirror.com/xdg-basedir/4.0.0:

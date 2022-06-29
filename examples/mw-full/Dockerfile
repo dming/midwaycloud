@@ -19,7 +19,7 @@ COPY . .
 RUN pnpm install -r --offline 
 # --prod
 
-VOLUME ["/app/node_modules/", "/app/examples/mw-full/node_modules/"]
+VOLUME ["/app/node_modules/", "/app/examples/mw-full/node_modules/", "/app/packages/mwcloud-moleculer/node_modules/"]
 
 # 启动mw-full项目的开发环境
 CMD cd examples/mw-full && pnpm run dev

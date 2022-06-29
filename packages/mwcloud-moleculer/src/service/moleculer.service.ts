@@ -9,8 +9,8 @@ import {
 } from "@midwayjs/decorator";
 import cluster from "cluster";
 import { ServiceBroker } from "moleculer";
-import { MoleculerConfigKey } from "src/constant";
-import { MoleculerConfig } from "src/types";
+import { MoleculerConfigKey } from "../constant";
+import { MoleculerConfig } from "../types";
 import _ from "lodash";
 
 /**
