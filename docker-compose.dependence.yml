@@ -1,0 +1,47 @@
+version: "3.3"
+# 使用命令 docker-compose -f docker-compose.dependence.yml up -d 即可
+# 这样就无需每次都重启这些固定服务
+services:
+  mysql:
+    image: mysql:5.7
+
+    volumes:
+      - /d/mysql/docker/conf:/etc/mysql
+      - /d/mysql/docker/data:/var/lib/mysql
+      - /d/mysql/docker/log:/var/log/mysql
+    networks:
+      - moleculer-net
+
+  nats:
+    image: nats:2
+    networks:
+      - moleculer-net
+
+  redis:
+    image: redis:5.0.5
+    volumes:
+      - /d/redis/docker/myredis.conf:/etc/redis/myredis.conf
+      - /d/redis/docker/data:/data
+    networks:
+      - moleculer-net
+
+  # traefik:
+  #   image: traefik:v2.1
+  #   command:
+  #     - "--api.insecure=true" # Don't do that in production!
+  #     - "--providers.docker=true"
+  #     - "--providers.docker.exposedbydefault=false"
+  #   ports:
+  #     - 3000:80
+  #     - 3001:8080
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock:ro
+  #   networks:
+  #     - moleculer-net
+  #     - default
+
+networks:
+  moleculer-net:
+    external: true
+# volumes:
+#   data:

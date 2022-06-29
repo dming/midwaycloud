@@ -16,10 +16,10 @@ export default {
 
   orm: {
     type: "mysql",
-    host: "127.0.0.1",
+    host: "mysql", //for docker
     port: 3306,
     username: "root",
-    password: "root",
+    password: "dming",
     database: "my-admin",
     synchronize: false,
     logging: true,
@@ -41,7 +41,7 @@ export default {
   redis: {
     client: {
       port: 6379, // Redis port
-      host: "127.0.0.1", // Redis host
+      host: "redis", // Redis host
       password: "123456root",
       db: 0,
     },

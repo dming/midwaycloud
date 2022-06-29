@@ -1,0 +1,116 @@
+version: "3.3"
+
+services:
+  frontend:
+    build:
+      context: ./
+      dockerfile: ./examples/mw-full/Dockerfile #每个package对应的dockerfile
+    image: mw-full
+    env_file: docker-compose.env
+    environment:
+      SERVICES: frontend
+      PORT: 3000
+    volumes:
+      - .:/app
+    depends_on:
+      - nats
+      - redis
+      - mysql
+    # labels:
+    #   - "traefik.enable=true"
+    #   - "traefik.http.routers.api-gw.rule=PathPrefix(`/`)"
+    #   - "traefik.http.services.api-gw.loadbalancer.server.port=3000"
+    networks:
+      - moleculer-net
+    ports:
+      - "7011:7001"
+    links:
+      - redis
+
+  backend:
+    build:
+      context: .
+      dockerfile: ./examples/mw-full/Dockerfile #每个package对应的dockerfile
+    image: mw-full
+    env_file: docker-compose.env
+    environment:
+      SERVICES: backend
+    volumes:
+      - .:/app
+    depends_on:
+      - nats
+      - redis
+      - mysql
+    networks:
+      - moleculer-net
+    ports:
+      - "7012:7001"
+
+  # products:
+  #   build:
+  #     context: .
+  #   image: my-project
+  #   env_file: docker-compose.env
+  #   environment:
+  #     SERVICES: products
+  #   depends_on:
+  #     - mongo
+  #     - nats
+  #     - redis
+  #   networks:
+  #     - moleculer-net
+
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root1
+    restart: always
+    volumes:
+      - /d/mysql/docker/conf:/etc/mysql
+      - /d/mysql/docker/data:/var/lib/mysql
+      - /d/mysql/docker/log:/var/log/mysql
+    networks:
+      - moleculer-net
+    ports:
+      - "3306:3306"
+
+  nats:
+    image: nats:2
+    ports:
+      - "4222:4222"
+      - "6222:6222"
+      - "8222:8222"
+    networks:
+      - moleculer-net
+
+  redis:
+    image: redis:5.0.5
+    volumes:
+      - /d/redis/docker/myredis.conf:/etc/redis/myredis.conf:ro
+      - /d/redis/docker/data:/data
+    ports:
+      - "6379:6379"
+    networks:
+      - moleculer-net
+    # command: ["redis-server", "--bind", "redis", "--port", "6379"]
+
+  # traefik:
+  #   image: traefik:v2.1
+  #   command:
+  #     - "--api.insecure=true" # Don't do that in production!
+  #     - "--providers.docker=true"
+  #     - "--providers.docker.exposedbydefault=false"
+  #   ports:
+  #     - 3000:80
+  #     - 3001:8080
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock:ro
+  #   networks:
+  #     - moleculer-net
+  #     - default
+
+networks:
+  moleculer-net:
+    external: true
+# volumes:
+#   data:

@@ -1,0 +1,14 @@
+**/docker-compose.env
+**/docker-compose.yml
+**/Dockerfile
+**/node_modules
+**/dist
+**/test
+.vscode
+
+**/logs
+**/run
+**/sql
+**/database
+__temp__
+*/__temp__
