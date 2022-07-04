@@ -1,8 +1,10 @@
-import { BrokerOptions, Errors } from "moleculer";
+import { BrokerOptions, Errors, Service } from "moleculer";
 
-const config: Omit<BrokerOptions, "namespace" | "nodeID"> = {
+const config: Omit<BrokerOptions, "nodeID"> = {
+  // fix: pnpm dev时软连接导致的引用错误
+  ServiceFactory: Service,
   // Namespace of nodes to segment your nodes on the same network.
-  //   namespace: "",
+  namespace: "DmingCloud",
   // Unique node identifier. Must be unique in a namespace.
   //   nodeID: null,
   // Custom metadata store. Store here what you want. Accessing: `this.broker.metadata`
@@ -27,13 +29,14 @@ const config: Omit<BrokerOptions, "namespace" | "nodeID"> = {
   },
   // Default log level for built-in console logger. It can be overwritten in logger options above.
   // Available values: trace, debug, info, warn, error, fatal
-  logLevel: "info",
+  logLevel: "debug",
 
   // Define transporter.
   // More info: https://moleculer.services/docs/0.14/networking.html
   // Note: During the development, you don't need to define it because all services will be loaded locally.
   // In production you can set it via `TRANSPORTER=nats://localhost:4222` environment variable.
-  transporter: null, // "NATS"
+  transporter: "nats://nats:4222",
+  // transporter: "redis://redis:6379",
 
   // Define a cacher.
   // More info: https://moleculer.services/docs/0.14/caching.html
@@ -86,13 +89,14 @@ const config: Omit<BrokerOptions, "namespace" | "nodeID"> = {
   // disableBalancer: false,
 
   // Settings of Service Registry. More info: https://moleculer.services/docs/0.14/registry.html
-  // registry: {
-  //   // Define balancing strategy. More info: https://moleculer.services/docs/0.14/balancing.html
-  //   // Available values: "RoundRobin", "Random", "CpuUsage", "Latency", "Shard"
-  //   strategy: "RoundRobin",
-  //   // Enable local action call preferring. Always call the local action instance if available.
-  //   preferLocal: true,
-  // },
+  registry: {
+    discoverer: "redis://redis:6379",
+    // Define balancing strategy. More info: https://moleculer.services/docs/0.14/balancing.html
+    // Available values: "RoundRobin", "Random", "CpuUsage", "Latency", "Shard"
+    strategy: "RoundRobin",
+    // Enable local action call preferring. Always call the local action instance if available.
+    preferLocal: true,
+  },
 
   // Settings of Circuit Breaker. More info: https://moleculer.services/docs/0.14/fault-tolerance.html#Circuit-Breaker
   // circuitBreaker: {

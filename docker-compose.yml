@@ -8,7 +8,8 @@ services:
     image: mw-full
     env_file: docker-compose.env
     environment:
-      MOLECULER_SERVICES: frontend
+      MOLECULER_SERVICE: frontend
+      MOLECULER_SERVICE_NUM: 1
       PORT: 3000
     volumes:
       - .:/app
@@ -34,7 +35,8 @@ services:
     image: mw-full
     env_file: docker-compose.env
     environment:
-      MOLECULER_SERVICES: backend
+      MOLECULER_SERVICE: backend
+      MOLECULER_SERVICE_NUM: 2
     volumes:
       - .:/app
     depends_on:
@@ -46,19 +48,25 @@ services:
     ports:
       - "7012:7001"
 
-  # products:
+  # default:
   #   build:
   #     context: .
-  #   image: my-project
+  #     dockerfile: ./examples/mw-full/Dockerfile #每个package对应的dockerfile
+  #   image: mw-full
   #   env_file: docker-compose.env
   #   environment:
-  #     SERVICES: products
+  #     MOLECULER_SERVICE: docker
+  #     MOLECULER_SERVICE_NUM: 2
+  #   volumes:
+  #     - .:/app
   #   depends_on:
-  #     - mongo
   #     - nats
   #     - redis
+  #     - mysql
   #   networks:
   #     - moleculer-net
+  #   ports:
+  #     - "7013:7001"
 
   mysql:
     image: mysql:5.7

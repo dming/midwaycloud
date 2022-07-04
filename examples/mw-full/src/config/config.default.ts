@@ -4,7 +4,7 @@ import {
 } from "@dming/mwcloud-moleculer";
 import { MidwayConfig, MidwayAppInfo } from "@midwayjs/core";
 
-const STYPE = process.env.MOLECULER_SERVICES || "default";
+const STYPE = process.env.MOLECULER_SERVICE || "default";
 const moleculerConf = importMoleculerConfig(STYPE, __dirname);
 console.log("[%s] moleculerConf is %j", STYPE, moleculerConf);
 

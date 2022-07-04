@@ -32,11 +32,13 @@ export class MoleculerService {
 
   @Init()
   public async init() {
-    const namespace = this.moleculerConfig.namespace || process.env.SERVER_TYPE;
+    const namespace = this.moleculerConfig.namespace;
+    const nodeType = process.env.MOLECULER_SERVICE ?? "default";
+    const nodeNum = process.env.MOLECULER_SERVICE_NUM ?? 0;
     const env = this.app.getEnv();
     this._broker = new ServiceBroker({
       namespace,
-      nodeID: `${env}-${namespace}-${
+      nodeID: `${env}-${nodeType}-${nodeNum}-${
         env === "local" ? "local" : cluster.worker.id
       }`,
       ...this.moleculerConfig,
@@ -47,5 +49,7 @@ export class MoleculerService {
         this._broker.loadServices(...value);
       });
     }
+
+    this._broker.start();
   }
 }

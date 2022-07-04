@@ -1,6 +1,10 @@
-import { BrokerOptions, Errors, MetricRegistry } from "moleculer";
+import { BrokerOptions, Errors } from "moleculer";
 
 const config: Omit<BrokerOptions, "namespace" | "nodeID"> = {
+  // 巨坑，App Config一定要设置这个，不然会让service-broker.js的Object.prototype.isPrototypeOf.call(this.ServiceFactory, schema)判断错误。
+  // 因为在Dev模式下，App里的Service和this.ServiceFactory不是同一个。Servicerequire自App/node_modules而this.ServiceFactory却require自mwcloud-moleculer/node_modules(devDependence);
+  // ServiceFactory: Service,
+
   // Namespace of nodes to segment your nodes on the same network.
   //   namespace: "",
   // Unique node identifier. Must be unique in a namespace.
@@ -37,7 +41,7 @@ const config: Omit<BrokerOptions, "namespace" | "nodeID"> = {
 
   // Define a cacher.
   // More info: https://moleculer.services/docs/0.14/caching.html
-  cacher: "Redis",
+  // cacher: "Redis",
 
   // Define a serializer.
   // Available values: "JSON", "Avro", "ProtoBuf", "MsgPack", "Notepack", "Thrift".
@@ -75,106 +79,106 @@ const config: Omit<BrokerOptions, "namespace" | "nodeID"> = {
   contextParamsCloning: false,
 
   // Tracking requests and waiting for running requests before shuting down. More info: https://moleculer.services/docs/0.14/context.html#Context-tracking
-  tracking: {
-    // Enable feature
-    enabled: false,
-    // Number of milliseconds to wait before shuting down the process.
-    shutdownTimeout: 5000,
-  },
+  // tracking: {
+  //   // Enable feature
+  //   enabled: false,
+  //   // Number of milliseconds to wait before shuting down the process.
+  //   shutdownTimeout: 5000,
+  // },
 
   // Disable built-in request & emit balancer. (Transporter must support it, as well.). More info: https://moleculer.services/docs/0.14/networking.html#Disabled-balancer
-  disableBalancer: false,
+  // disableBalancer: false,
 
   // Settings of Service Registry. More info: https://moleculer.services/docs/0.14/registry.html
-  registry: {
-    // Define balancing strategy. More info: https://moleculer.services/docs/0.14/balancing.html
-    // Available values: "RoundRobin", "Random", "CpuUsage", "Latency", "Shard"
-    strategy: "RoundRobin",
-    // Enable local action call preferring. Always call the local action instance if available.
-    preferLocal: true,
-  },
+  // registry: {
+  //   // Define balancing strategy. More info: https://moleculer.services/docs/0.14/balancing.html
+  //   // Available values: "RoundRobin", "Random", "CpuUsage", "Latency", "Shard"
+  //   strategy: "RoundRobin",
+  //   // Enable local action call preferring. Always call the local action instance if available.
+  //   preferLocal: true,
+  // },
 
   // Settings of Circuit Breaker. More info: https://moleculer.services/docs/0.14/fault-tolerance.html#Circuit-Breaker
-  circuitBreaker: {
-    // Enable feature
-    enabled: false,
-    // Threshold value. 0.5 means that 50% should be failed for tripping.
-    threshold: 0.5,
-    // Minimum request count. Below it, CB does not trip.
-    minRequestCount: 20,
-    // Number of seconds for time window.
-    windowTime: 60,
-    // Number of milliseconds to switch from open to half-open state
-    halfOpenTime: 10 * 1000,
-    // A function to check failed requests.
-    check: (err: Errors.MoleculerError) => err && err.code >= 500,
-  },
+  // circuitBreaker: {
+  //   // Enable feature
+  //   enabled: false,
+  //   // Threshold value. 0.5 means that 50% should be failed for tripping.
+  //   threshold: 0.5,
+  //   // Minimum request count. Below it, CB does not trip.
+  //   minRequestCount: 20,
+  //   // Number of seconds for time window.
+  //   windowTime: 60,
+  //   // Number of milliseconds to switch from open to half-open state
+  //   halfOpenTime: 10 * 1000,
+  //   // A function to check failed requests.
+  //   check: (err: Errors.MoleculerError) => err && err.code >= 500,
+  // },
 
   // Settings of bulkhead feature. More info: https://moleculer.services/docs/0.14/fault-tolerance.html#Bulkhead
-  bulkhead: {
-    // Enable feature.
-    enabled: false,
-    // Maximum concurrent executions.
-    concurrency: 10,
-    // Maximum size of queue
-    maxQueueSize: 100,
-  },
+  // bulkhead: {
+  //   // Enable feature.
+  //   enabled: false,
+  //   // Maximum concurrent executions.
+  //   concurrency: 10,
+  //   // Maximum size of queue
+  //   maxQueueSize: 100,
+  // },
 
   // Enable action & event parameter validation. More info: https://moleculer.services/docs/0.14/validating.html
-  validator: true,
+  // validator: true,
 
-  errorHandler: null,
+  // errorHandler: null,
 
   // Enable/disable built-in metrics function. More info: https://moleculer.services/docs/0.14/metrics.html
-  metrics: {
-    enabled: true,
-    // Available built-in reporters: "Console", "CSV", "Event", "Prometheus", "Datadog", "StatsD"
-    reporter: {
-      type: "Prometheus",
-      options: {
-        // HTTP port
-        port: 3030,
-        // HTTP URL path
-        path: "/metrics",
-        // Default labels which are appended to all metrics labels
-        defaultLabels: (registry: MetricRegistry) => ({
-          namespace: registry.broker.namespace,
-          nodeID: registry.broker.nodeID,
-        }),
-      },
-    },
-  },
+  // metrics: {
+  //   enabled: true,
+  //   // Available built-in reporters: "Console", "CSV", "Event", "Prometheus", "Datadog", "StatsD"
+  //   reporter: {
+  //     type: "Prometheus",
+  //     options: {
+  //       // HTTP port
+  //       port: 3030,
+  //       // HTTP URL path
+  //       path: "/metrics",
+  //       // Default labels which are appended to all metrics labels
+  //       defaultLabels: (registry: MetricRegistry) => ({
+  //         namespace: registry.broker.namespace,
+  //         nodeID: registry.broker.nodeID,
+  //       }),
+  //     },
+  //   },
+  // },
 
   // Enable built-in tracing function. More info: https://moleculer.services/docs/0.14/tracing.html
-  tracing: {
-    enabled: true,
-    // Available built-in exporters: "Console", "Datadog", "Event", "EventLegacy", "Jaeger", "Zipkin"
-    exporter: {
-      type: "Jaeger", // Console exporter is only for development!
-      options: {
-        // HTTP Reporter endpoint. If set, HTTP Reporter will be used.
-        endpoint: null,
-        // UDP Sender host option.
-        host: "127.0.0.1",
-        // UDP Sender port option.
-        port: 6832,
-        // Jaeger Sampler configuration.
-        sampler: {
-          // Sampler type. More info: https://www.jaegertracing.io/docs/1.14/sampling/#client-sampling-configuration
-          type: "Const",
-          // Sampler specific options.
-          options: {},
-        },
-        // Additional options for `Jaeger.Tracer`
-        tracerOptions: {},
-        // Default tags. They will be added into all span tags.
-        defaultTags: null,
-      },
-    },
-  },
+  // tracing: {
+  //   enabled: true,
+  //   // Available built-in exporters: "Console", "Datadog", "Event", "EventLegacy", "Jaeger", "Zipkin"
+  //   exporter: {
+  //     type: "Jaeger", // Console exporter is only for development!
+  //     options: {
+  //       // HTTP Reporter endpoint. If set, HTTP Reporter will be used.
+  //       endpoint: null,
+  //       // UDP Sender host option.
+  //       host: "127.0.0.1",
+  //       // UDP Sender port option.
+  //       port: 6832,
+  //       // Jaeger Sampler configuration.
+  //       sampler: {
+  //         // Sampler type. More info: https://www.jaegertracing.io/docs/1.14/sampling/#client-sampling-configuration
+  //         type: "Const",
+  //         // Sampler specific options.
+  //         options: {},
+  //       },
+  //       // Additional options for `Jaeger.Tracer`
+  //       tracerOptions: {},
+  //       // Default tags. They will be added into all span tags.
+  //       defaultTags: null,
+  //     },
+  //   },
+  // },
 
   // Register custom middlewares
-  middlewares: [],
+  // middlewares: [],
 
   //   // Register custom REPL commands.
   //   // replCommands: null,

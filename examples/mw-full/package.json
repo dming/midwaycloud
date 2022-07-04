@@ -4,6 +4,9 @@
   "description": "",
   "private": true,
   "dependencies": {
+    "@dming/mwcloud-casbin": "workspace:*",
+    "@dming/mwcloud-moleculer": "workspace:*",
+    "@dming/mwcloud-utils": "workspace:*",
     "@midwayjs/bootstrap": "^3.0.0",
     "@midwayjs/core": "^3.0.0",
     "@midwayjs/decorator": "^3.0.0",
@@ -21,15 +24,13 @@
     "egg-scripts": "^2.13.0",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
-    "mysql2": "^2.3.3",
-    "svg-captcha": "^1.4.0",
-    "swagger-ui-dist": "^3.45.1",
-    "typeorm": "^0.3.6",
     "moleculer": "^0.14.21",
     "moleculer-decorators": "^1.3.0",
-    "@dming/mwcloud-casbin": "workspace:*",
-    "@dming/mwcloud-utils": "workspace:*",
-    "@dming/mwcloud-moleculer": "workspace:*"
+    "mysql2": "^2.3.3",
+    "nats": "^2.7.1",
+    "svg-captcha": "^1.4.0",
+    "swagger-ui-dist": "^3.45.1",
+    "typeorm": "^0.3.6"
   },
   "devDependencies": {
     "@midwayjs/cli": "^1.0.0",

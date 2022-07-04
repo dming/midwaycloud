@@ -16,7 +16,7 @@ export default {
 
   orm: {
     type: "mysql",
-    host: "mysql", //for docker
+    host: process.env.MOLECULER_SERVICE ? "mysql" : "127.0.0.1", //for docker
     port: 3306,
     username: "root",
     password: "dming",
@@ -41,7 +41,7 @@ export default {
   redis: {
     client: {
       port: 6379, // Redis port
-      host: "redis", // Redis host
+      host: process.env.MOLECULER_SERVICE ? "redis" : "127.0.0.1", // Redis host
       password: "123456root",
       db: 0,
     },
@@ -49,7 +49,7 @@ export default {
 
   midwayLogger: {
     default: {
-      consoleLevel: "info",
+      consoleLevel: "debug",
     },
   },
 } as MidwayConfig & DefaultConfig;

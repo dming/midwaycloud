@@ -1,4 +1,4 @@
-import { MoleculerConfig } from "@dming/mwcloud-moleculer";
+import { MoleculerConfig } from "../../types";
 
 export default {
   namespace: "default",

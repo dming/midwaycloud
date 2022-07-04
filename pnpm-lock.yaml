@@ -68,6 +68,7 @@ importers:
       moleculer-decorators: ^1.3.0
       mwts: ^1.0.5
       mysql2: ^2.3.3
+      nats: ^2.7.1
       svg-captcha: ^1.4.0
       swagger-ui-dist: ^3.45.1
       ts-jest: ^26.2.0
@@ -94,9 +95,10 @@ importers:
       egg-scripts: registry.npmmirror.com/egg-scripts/2.17.0
       jsonwebtoken: registry.npmmirror.com/jsonwebtoken/8.5.1
       lodash: registry.npmmirror.com/lodash/4.17.21
-      moleculer: registry.npmmirror.com/moleculer/0.14.21
-      moleculer-decorators: registry.npmmirror.com/moleculer-decorators/1.3.0
+      moleculer: registry.npmmirror.com/moleculer/0.14.21_nats@2.7.1
+      moleculer-decorators: registry.npmmirror.com/moleculer-decorators/1.3.0_nats@2.7.1
       mysql2: registry.npmmirror.com/mysql2/2.3.3
+      nats: registry.npmmirror.com/nats/2.7.1
       svg-captcha: registry.npmmirror.com/svg-captcha/1.4.0
       swagger-ui-dist: registry.npmmirror.com/swagger-ui-dist/3.52.5
       typeorm: registry.npmmirror.com/typeorm/0.3.6_mysql2@2.3.3
@@ -1212,7 +1214,7 @@ packages:
     engines: {node: '>= 10.14.2'}
     dependencies:
       '@jest/types': registry.npmmirror.com/@jest/types/26.6.2
-      '@types/node': registry.npmmirror.com/@types/node/16.11.41
+      '@types/node': registry.npmmirror.com/@types/node/17.0.43
       chalk: registry.npmmirror.com/chalk/4.1.2
       jest-message-util: registry.npmmirror.com/jest-message-util/26.6.2
       jest-util: registry.npmmirror.com/jest-util/26.6.2
@@ -1373,7 +1375,7 @@ packages:
     dependencies:
       '@jest/fake-timers': registry.npmmirror.com/@jest/fake-timers/26.6.2
       '@jest/types': registry.npmmirror.com/@jest/types/26.6.2
-      '@types/node': registry.npmmirror.com/@types/node/16.11.41
+      '@types/node': registry.npmmirror.com/@types/node/17.0.43
       jest-mock: registry.npmmirror.com/jest-mock/26.6.2
     dev: true
 
@@ -1397,7 +1399,7 @@ packages:
     dependencies:
       '@jest/types': registry.npmmirror.com/@jest/types/26.6.2
       '@sinonjs/fake-timers': registry.npmmirror.com/@sinonjs/fake-timers/6.0.1
-      '@types/node': registry.npmmirror.com/@types/node/16.11.41
+      '@types/node': registry.npmmirror.com/@types/node/17.0.43
       jest-message-util: registry.npmmirror.com/jest-message-util/26.6.2
       jest-mock: registry.npmmirror.com/jest-mock/26.6.2
       jest-util: registry.npmmirror.com/jest-util/26.6.2
@@ -1672,7 +1674,7 @@ packages:
     dependencies:
       '@types/istanbul-lib-coverage': registry.npmmirror.com/@types/istanbul-lib-coverage/2.0.4
       '@types/istanbul-reports': registry.npmmirror.com/@types/istanbul-reports/3.0.1
-      '@types/node': registry.npmmirror.com/@types/node/16.11.41
+      '@types/node': registry.npmmirror.com/@types/node/17.0.43
       '@types/yargs': registry.npmmirror.com/@types/yargs/15.0.14
       chalk: registry.npmmirror.com/chalk/4.1.2
     dev: true
@@ -2495,7 +2497,7 @@ packages:
     version: 1.19.2
     dependencies:
       '@types/connect': registry.npmmirror.com/@types/connect/3.4.35
-      '@types/node': registry.npmmirror.com/@types/node/16.11.38
+      '@types/node': registry.npmmirror.com/@types/node/17.0.43
     dev: false
 
   registry.npmmirror.com/@types/connect/3.4.35:
@@ -2503,7 +2505,7 @@ packages:
     name: '@types/connect'
     version: 3.4.35
     dependencies:
-      '@types/node': registry.npmmirror.com/@types/node/16.11.38
+      '@types/node': registry.npmmirror.com/@types/node/17.0.43
     dev: false
 
   registry.npmmirror.com/@types/content-disposition/0.5.5:
@@ -2526,7 +2528,7 @@ packages:
       '@types/connect': registry.npmmirror.com/@types/connect/3.4.35
       '@types/express': registry.npmmirror.com/@types/express/4.17.13
       '@types/keygrip': registry.npmmirror.com/@types/keygrip/1.0.2
-      '@types/node': registry.npmmirror.com/@types/node/16.11.38
+      '@types/node': registry.npmmirror.com/@types/node/17.0.43
     dev: false
 
   registry.npmmirror.com/@types/crypto-js/4.1.1:
@@ -2546,7 +2548,7 @@ packages:
     name: '@types/depd'
     version: 1.1.32
     dependencies:
-      '@types/node': registry.npmmirror.com/@types/node/16.11.38
+      '@types/node': registry.npmmirror.com/@types/node/17.0.43
     dev: false
 
   registry.npmmirror.com/@types/empower-core/1.2.1:
@@ -2569,7 +2571,7 @@ packages:
     name: '@types/express-serve-static-core'
     version: 4.17.28
     dependencies:
-      '@types/node': registry.npmmirror.com/@types/node/16.11.38
+      '@types/node': registry.npmmirror.com/@types/node/17.0.43
       '@types/qs': registry.npmmirror.com/@types/qs/6.9.7
       '@types/range-parser': registry.npmmirror.com/@types/range-parser/1.2.4
     dev: false
@@ -2591,14 +2593,14 @@ packages:
     version: 7.2.0
     dependencies:
       '@types/minimatch': registry.npmmirror.com/@types/minimatch/3.0.5
-      '@types/node': registry.npmmirror.com/@types/node/16.11.41
+      '@types/node': registry.npmmirror.com/@types/node/17.0.43
 
   registry.npmmirror.com/@types/graceful-fs/4.1.5:
     resolution: {integrity: sha512-anKkLmZZ+xm4p8JWBf4hElkM4XR+EZeA2M9BAkkTldmcyDY4mbdIJnRghDJH3Ov5ooY7/UAoENtmdMSkaAd7Cw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/graceful-fs/-/graceful-fs-4.1.5.tgz}
     name: '@types/graceful-fs'
     version: 4.1.5
     dependencies:
-      '@types/node': registry.npmmirror.com/@types/node/16.11.41
+      '@types/node': registry.npmmirror.com/@types/node/17.0.43
     dev: true
 
   registry.npmmirror.com/@types/http-assert/1.5.3:
@@ -2692,7 +2694,7 @@ packages:
     name: '@types/keyv'
     version: 3.1.4
     dependencies:
-      '@types/node': registry.npmmirror.com/@types/node/16.11.41
+      '@types/node': registry.npmmirror.com/@types/node/17.0.43
     dev: true
 
   registry.npmmirror.com/@types/koa-compose/3.2.5:
@@ -2755,6 +2757,12 @@ packages:
     version: 10.17.60
     dev: false
 
+  registry.npmmirror.com/@types/node/14.18.21:
+    resolution: {integrity: sha512-x5W9s+8P4XteaxT/jKF0PSb7XEvo5VmqEWgsMlyeY4ZlLK8I6aH6g5TPPyDlLAep+GYf4kefb7HFyc7PAO3m+Q==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/node/-/node-14.18.21.tgz}
+    name: '@types/node'
+    version: 14.18.21
+    dev: false
+
   registry.npmmirror.com/@types/node/16.11.38:
     resolution: {integrity: sha512-hjO/0K140An3GWDw2HJfq7gko3wWeznbjXgg+rzPdVzhe198hp4x2i1dgveAOEiFKd8sOilAxzoSJiVv5P/CUg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/node/-/node-16.11.38.tgz}
     name: '@types/node'
@@ -2770,12 +2778,12 @@ packages:
     resolution: {integrity: sha512-mqoYK2TnVjdkGk8qXAVGc/x9nSaTpSrFaGFm43BUH3IdoBV0nta6hYaGmdOvIMlbHJbUEVen3gvwpwovAZKNdQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/node/-/node-16.11.41.tgz}
     name: '@types/node'
     version: 16.11.41
+    dev: true
 
   registry.npmmirror.com/@types/node/17.0.43:
     resolution: {integrity: sha512-jnUpgw8fL9kP2iszfIDyBQtw5Mf4/XSqy0Loc1J9pI14ejL83XcCEvSf50Gs/4ET0I9VCCDoOfufQysj0S66xA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/node/-/node-17.0.43.tgz}
     name: '@types/node'
     version: 17.0.43
-    dev: true
 
   registry.npmmirror.com/@types/normalize-package-data/2.4.1:
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/normalize-package-data/-/normalize-package-data-2.4.1.tgz}
@@ -2827,7 +2835,7 @@ packages:
     name: '@types/responselike'
     version: 1.0.0
     dependencies:
-      '@types/node': registry.npmmirror.com/@types/node/16.11.41
+      '@types/node': registry.npmmirror.com/@types/node/17.0.43
     dev: true
 
   registry.npmmirror.com/@types/serve-static/1.13.10:
@@ -2836,7 +2844,7 @@ packages:
     version: 1.13.10
     dependencies:
       '@types/mime': registry.npmmirror.com/@types/mime/1.3.2
-      '@types/node': registry.npmmirror.com/@types/node/16.11.38
+      '@types/node': registry.npmmirror.com/@types/node/17.0.43
     dev: false
 
   registry.npmmirror.com/@types/stack-utils/2.0.1:
@@ -2852,7 +2860,7 @@ packages:
     deprecated: '[WARNING] Use 4.1.14 instead of 4.1.15, reason: https://github.com/DefinitelyTyped/DefinitelyTyped/issues/58445'
     dependencies:
       '@types/cookiejar': registry.npmmirror.com/@types/cookiejar/2.1.2
-      '@types/node': registry.npmmirror.com/@types/node/16.11.41
+      '@types/node': registry.npmmirror.com/@types/node/17.0.43
     dev: true
 
   registry.npmmirror.com/@types/supertest/2.0.11:
@@ -8192,7 +8200,7 @@ packages:
       jest-validate: registry.npmmirror.com/jest-validate/26.6.2
       micromatch: registry.npmmirror.com/micromatch/4.0.5
       pretty-format: registry.npmmirror.com/pretty-format/26.6.2
-      ts-node: registry.npmmirror.com/ts-node/10.8.1_ywzpswnnt6kp7ikngulc2rxtlu
+      ts-node: registry.npmmirror.com/ts-node/10.8.1_ukj7ket6x7kbcdkmawseogdx4e
     transitivePeerDependencies:
       - bufferutil
       - canvas
@@ -8319,7 +8327,7 @@ packages:
       '@jest/environment': registry.npmmirror.com/@jest/environment/26.6.2
       '@jest/fake-timers': registry.npmmirror.com/@jest/fake-timers/26.6.2
       '@jest/types': registry.npmmirror.com/@jest/types/26.6.2
-      '@types/node': registry.npmmirror.com/@types/node/16.11.41
+      '@types/node': registry.npmmirror.com/@types/node/17.0.43
       jest-mock: registry.npmmirror.com/jest-mock/26.6.2
       jest-util: registry.npmmirror.com/jest-util/26.6.2
       jsdom: registry.npmmirror.com/jsdom/16.7.0
@@ -8400,7 +8408,7 @@ packages:
     dependencies:
       '@jest/types': registry.npmmirror.com/@jest/types/26.6.2
       '@types/graceful-fs': registry.npmmirror.com/@types/graceful-fs/4.1.5
-      '@types/node': registry.npmmirror.com/@types/node/16.11.41
+      '@types/node': registry.npmmirror.com/@types/node/17.0.43
       anymatch: registry.npmmirror.com/anymatch/3.1.2
       fb-watchman: registry.npmmirror.com/fb-watchman/2.0.1
       graceful-fs: registry.npmmirror.com/graceful-fs/4.2.10
@@ -8450,7 +8458,7 @@ packages:
       '@jest/source-map': registry.npmmirror.com/@jest/source-map/26.6.2
       '@jest/test-result': registry.npmmirror.com/@jest/test-result/26.6.2
       '@jest/types': registry.npmmirror.com/@jest/types/26.6.2
-      '@types/node': registry.npmmirror.com/@types/node/16.11.38
+      '@types/node': registry.npmmirror.com/@types/node/17.0.43
       chalk: registry.npmmirror.com/chalk/4.1.2
       co: registry.npmmirror.com/co/4.6.0
       expect: registry.npmmirror.com/expect/26.6.2
@@ -8483,7 +8491,7 @@ packages:
       '@jest/source-map': registry.npmmirror.com/@jest/source-map/26.6.2
       '@jest/test-result': registry.npmmirror.com/@jest/test-result/26.6.2
       '@jest/types': registry.npmmirror.com/@jest/types/26.6.2
-      '@types/node': registry.npmmirror.com/@types/node/16.11.38
+      '@types/node': registry.npmmirror.com/@types/node/17.0.43
       chalk: registry.npmmirror.com/chalk/4.1.2
       co: registry.npmmirror.com/co/4.6.0
       expect: registry.npmmirror.com/expect/26.6.2
@@ -8616,7 +8624,7 @@ packages:
     engines: {node: '>= 10.14.2'}
     dependencies:
       '@jest/types': registry.npmmirror.com/@jest/types/26.6.2
-      '@types/node': registry.npmmirror.com/@types/node/16.11.41
+      '@types/node': registry.npmmirror.com/@types/node/17.0.43
     dev: true
 
   registry.npmmirror.com/jest-mock/27.5.1:
@@ -8743,7 +8751,7 @@ packages:
       '@jest/environment': registry.npmmirror.com/@jest/environment/26.6.2
       '@jest/test-result': registry.npmmirror.com/@jest/test-result/26.6.2
       '@jest/types': registry.npmmirror.com/@jest/types/26.6.2
-      '@types/node': registry.npmmirror.com/@types/node/16.11.38
+      '@types/node': registry.npmmirror.com/@types/node/17.0.43
       chalk: registry.npmmirror.com/chalk/4.1.2
       emittery: registry.npmmirror.com/emittery/0.7.2
       exit: registry.npmmirror.com/exit/0.1.2
@@ -8778,7 +8786,7 @@ packages:
       '@jest/environment': registry.npmmirror.com/@jest/environment/26.6.2
       '@jest/test-result': registry.npmmirror.com/@jest/test-result/26.6.2
       '@jest/types': registry.npmmirror.com/@jest/types/26.6.2
-      '@types/node': registry.npmmirror.com/@types/node/16.11.38
+      '@types/node': registry.npmmirror.com/@types/node/17.0.43
       chalk: registry.npmmirror.com/chalk/4.1.2
       emittery: registry.npmmirror.com/emittery/0.7.2
       exit: registry.npmmirror.com/exit/0.1.2
@@ -8959,7 +8967,7 @@ packages:
     version: 26.6.2
     engines: {node: '>= 10.14.2'}
     dependencies:
-      '@types/node': registry.npmmirror.com/@types/node/16.11.41
+      '@types/node': registry.npmmirror.com/@types/node/17.0.43
       graceful-fs: registry.npmmirror.com/graceful-fs/4.2.10
     dev: true
 
@@ -9095,7 +9103,7 @@ packages:
     dependencies:
       '@jest/test-result': registry.npmmirror.com/@jest/test-result/26.6.2
       '@jest/types': registry.npmmirror.com/@jest/types/26.6.2
-      '@types/node': registry.npmmirror.com/@types/node/16.11.41
+      '@types/node': registry.npmmirror.com/@types/node/17.0.43
       ansi-escapes: registry.npmmirror.com/ansi-escapes/4.3.2
       chalk: registry.npmmirror.com/chalk/4.1.2
       jest-util: registry.npmmirror.com/jest-util/26.6.2
@@ -9123,7 +9131,7 @@ packages:
     version: 26.6.2
     engines: {node: '>= 10.13.0'}
     dependencies:
-      '@types/node': registry.npmmirror.com/@types/node/16.11.41
+      '@types/node': registry.npmmirror.com/@types/node/17.0.43
       merge-stream: registry.npmmirror.com/merge-stream/2.0.0
       supports-color: registry.npmmirror.com/supports-color/7.2.0
     dev: true
@@ -10267,6 +10275,40 @@ packages:
       - rhea-promise
       - thrift
       - winston
+    dev: true
+
+  registry.npmmirror.com/moleculer-decorators/1.3.0_nats@2.7.1:
+    resolution: {integrity: sha512-zU0catv3rMYz+8rCSgK6l9q3ilAzJve60tHf2Hyjdi4eLEdVvVPnn2c5VJupjfi5q8dhnUTYugK6YTMKUl/4UA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/moleculer-decorators/-/moleculer-decorators-1.3.0.tgz}
+    id: registry.npmmirror.com/moleculer-decorators/1.3.0
+    name: moleculer-decorators
+    version: 1.3.0
+    dependencies:
+      moleculer: registry.npmmirror.com/moleculer/0.14.21_nats@2.7.1
+    transitivePeerDependencies:
+      - amqplib
+      - avsc
+      - bunyan
+      - cbor-x
+      - dd-trace
+      - debug
+      - encoding
+      - etcd3
+      - ioredis
+      - jaeger-client
+      - kafka-node
+      - log4js
+      - mqtt
+      - msgpack5
+      - nats
+      - node-nats-streaming
+      - notepack.io
+      - pino
+      - protobufjs
+      - redlock
+      - rhea-promise
+      - thrift
+      - winston
+    dev: false
 
   registry.npmmirror.com/moleculer/0.14.21:
     resolution: {integrity: sha512-z+kIzbYl4uMNLaIKvsSugGLMorvppsali53GdkfSEHooR/5II59DI+EnW234mI2M/OWy/MxFzuGVfqDsWZkJ9g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/moleculer/-/moleculer-0.14.21.tgz}
@@ -10355,6 +10397,98 @@ packages:
       recursive-watch: registry.npmmirror.com/recursive-watch/1.1.4
     transitivePeerDependencies:
       - encoding
+    dev: true
+
+  registry.npmmirror.com/moleculer/0.14.21_nats@2.7.1:
+    resolution: {integrity: sha512-z+kIzbYl4uMNLaIKvsSugGLMorvppsali53GdkfSEHooR/5II59DI+EnW234mI2M/OWy/MxFzuGVfqDsWZkJ9g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/moleculer/-/moleculer-0.14.21.tgz}
+    id: registry.npmmirror.com/moleculer/0.14.21
+    name: moleculer
+    version: 0.14.21
+    engines: {node: '>= 10.x.x'}
+    hasBin: true
+    peerDependencies:
+      amqplib: ^0.7.0 || ^0.8.0
+      avsc: ^5.0.0
+      bunyan: ^1.0.0
+      cbor-x: ^0.8.3 || ^0.9.0 || ^1.2.0
+      dd-trace: ^0.33.0 || ^0.34.0 || ^0.35.0 || ^0.36.0 || >=1.0.0 <1.6.0
+      debug: ^4.0.0
+      etcd3: ^1.0.0
+      ioredis: ^4.0.0
+      jaeger-client: ^3.0.0
+      kafka-node: ^5.0.0
+      log4js: ^6.0.0
+      mqtt: ^4.0.0
+      msgpack5: ^5.0.0 || ^6.0.0
+      nats: ^1.0.0 || ^2.0.0
+      node-nats-streaming: ^0.0.51 || ^0.2.0 || ^0.3.0
+      notepack.io: ^2.0.0
+      pino: ^6.0.0 || ^7.0.0
+      protobufjs: ^6.0.0
+      redlock: ^4.0.0
+      rhea-promise: ^1.0.0 || ^2.0.0
+      thrift: ^0.12.0 || ^0.16.0
+      winston: ^3.0.0
+    peerDependenciesMeta:
+      amqplib:
+        optional: true
+      avsc:
+        optional: true
+      bunyan:
+        optional: true
+      cbor-x:
+        optional: true
+      dd-trace:
+        optional: true
+      debug:
+        optional: true
+      etcd3:
+        optional: true
+      ioredis:
+        optional: true
+      jaeger-client:
+        optional: true
+      kafka-node:
+        optional: true
+      log4js:
+        optional: true
+      mqtt:
+        optional: true
+      msgpack5:
+        optional: true
+      nats:
+        optional: true
+      node-nats-streaming:
+        optional: true
+      notepack.io:
+        optional: true
+      pino:
+        optional: true
+      protobufjs:
+        optional: true
+      redlock:
+        optional: true
+      rhea-promise:
+        optional: true
+      thrift:
+        optional: true
+      winston:
+        optional: true
+    dependencies:
+      args: registry.npmmirror.com/args/5.0.3
+      eventemitter2: registry.npmmirror.com/eventemitter2/6.4.5
+      fastest-validator: registry.npmmirror.com/fastest-validator/1.12.0
+      glob: registry.npmmirror.com/glob/7.2.3
+      ipaddr.js: registry.npmmirror.com/ipaddr.js/2.0.1
+      kleur: registry.npmmirror.com/kleur/4.1.5
+      lodash: registry.npmmirror.com/lodash/4.17.21
+      lru-cache: registry.npmmirror.com/lru-cache/6.0.0
+      nats: registry.npmmirror.com/nats/2.7.1
+      node-fetch: registry.npmmirror.com/node-fetch/2.6.7
+      recursive-watch: registry.npmmirror.com/recursive-watch/1.1.4
+    transitivePeerDependencies:
+      - encoding
+    dev: false
 
   registry.npmmirror.com/moment-timezone/0.5.34:
     resolution: {integrity: sha512-3zAEHh2hKUs3EXLESx/wsgw6IQdusOT8Bxm3D9UrHPQR7zlMmzwybC8zHEM1tQ4LJwP7fcxrWr8tuBg05fFCbg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/moment-timezone/-/moment-timezone-0.5.34.tgz}
@@ -10561,6 +10695,15 @@ packages:
       - supports-color
     dev: true
 
+  registry.npmmirror.com/nats/2.7.1:
+    resolution: {integrity: sha512-aH0OXxasfLCTG+LQCFRaWoL1kqejCQg7B+t4z++JgLPgfdpQMET1Rqo95I06DEQyIJGTTgYpxkI/zC0ul8V3pw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/nats/-/nats-2.7.1.tgz}
+    name: nats
+    version: 2.7.1
+    engines: {node: '>= 10.0.0'}
+    dependencies:
+      nkeys.js: registry.npmmirror.com/nkeys.js/1.0.0-9
+    dev: false
+
   registry.npmmirror.com/natural-compare/1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/natural-compare/-/natural-compare-1.4.0.tgz}
     name: natural-compare
@@ -10598,6 +10741,16 @@ packages:
     name: nice-try
     version: 1.0.5
     dev: true
+
+  registry.npmmirror.com/nkeys.js/1.0.0-9:
+    resolution: {integrity: sha512-m9O0NQT+3rUe1om6MWpxV77EuHql/LdorDH+FYQkoeARcM2V0sQ89kM36fArWaHWq/25EmNmQUW0MhLTcbqW1A==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/nkeys.js/-/nkeys.js-1.0.0-9.tgz}
+    name: nkeys.js
+    version: 1.0.0-9
+    engines: {node: '>=10.0.0'}
+    dependencies:
+      '@types/node': registry.npmmirror.com/@types/node/14.18.21
+      tweetnacl: registry.npmmirror.com/tweetnacl/1.0.3
+    dev: false
 
   registry.npmmirror.com/no-case/2.3.2:
     resolution: {integrity: sha512-rmTZ9kz+f3rCvK2TD1Ue/oZlns7OGoIWP4fc3llxxRXlOkHKoWPPWJOfFYpITabSow43QJbRIoHQXtt10VldyQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/no-case/-/no-case-2.3.2.tgz}
@@ -13380,6 +13533,12 @@ packages:
     resolution: {integrity: sha512-+bGy9iDAqg3WSfc2ZrprToSPJhZjqy7vUv9wupQzsiv+BVPVx1T2a6G4T0290SpQj+56Toaw9BiLO5j5Bd7QzA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/ttl/-/ttl-1.3.1.tgz}
     name: ttl
     version: 1.3.1
+
+  registry.npmmirror.com/tweetnacl/1.0.3:
+    resolution: {integrity: sha512-6rt+RN7aOi1nGMyC4Xa5DdYiukl2UWCbcJft7YhxReBGQD7OAM8Pbxw6YMo4r2diNEA8FEmu32YOn9rhaiE5yw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/tweetnacl/-/tweetnacl-1.0.3.tgz}
+    name: tweetnacl
+    version: 1.0.3
+    dev: false
 
   registry.npmmirror.com/type-check/0.3.2:
     resolution: {integrity: sha512-ZCmOJdvOWDBYJlzAoFkC+Q0+bUyEOS1ltgp1MGU03fqHG+dbi9tBFU2Rd9QKiDZFAYrhPh2JUf7rZRIuHRKtOg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/type-check/-/type-check-0.3.2.tgz}

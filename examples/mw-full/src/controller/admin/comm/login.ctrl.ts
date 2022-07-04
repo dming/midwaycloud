@@ -1,3 +1,4 @@
+import { MoleculerService } from "@dming/mwcloud-moleculer";
 import {
   ALL,
   Body,
@@ -31,6 +32,9 @@ export class AdminLoginController {
   @Inject()
   userService: UserService;
 
+  @Inject()
+  moleculer: MoleculerService;
+
   @CreateApiDoc()
     .summary("管理员登录")
     .param("管理员登录信息参数")
@@ -45,6 +49,37 @@ export class AdminLoginController {
       loginInfo.username,
       loginInfo.password
     );
+
+    try {
+      const a = await this.moleculer.broker.call("backend.sayHello");
+      console.log("backend.sayhello >>>>>>>>> response is ", a);
+    } catch (e) {
+      console.log(
+        "what services is already registried:? ",
+        this.moleculer.broker.registry.services.list({
+          onlyLocal: false,
+          onlyAvailable: true,
+          skipInternal: false,
+          withActions: false,
+          withEvents: false,
+          grouping: false,
+        }),
+        this.moleculer.broker.registry.nodes.list({
+          onlyAvailable: false,
+          withServices: false,
+        })
+      );
+      // this.moleculer.broker
+      //   .call("$node.list")
+      //   .then(res => console.log("moleculer services $node.list: ", res));
+      // this.moleculer.broker
+      //   .call("$node.services")
+      //   .then(res => console.log("moleculer services $node.services: ", res));
+      // this.moleculer.broker
+      //   .call("$node.actions")
+      //   .then(res => console.log("moleculer services $node.actions: ", res));
+      throw e;
+    }
 
     if (isEmpty(sign)) {
       return Resp({ code: 10003 });
