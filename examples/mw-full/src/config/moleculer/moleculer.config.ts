@@ -1,4 +1,4 @@
-import { BrokerOptions, Errors, Service } from "moleculer";
+import { BrokerOptions, Errors, MetricRegistry, Service } from "moleculer";
 
 const config: Omit<BrokerOptions, "nodeID"> = {
   // fix: pnpm dev时软连接导致的引用错误
@@ -130,24 +130,24 @@ const config: Omit<BrokerOptions, "nodeID"> = {
   errorHandler: null,
 
   // Enable/disable built-in metrics function. More info: https://moleculer.services/docs/0.14/metrics.html
-  // metrics: {
-  //   enabled: true,
-  //   // Available built-in reporters: "Console", "CSV", "Event", "Prometheus", "Datadog", "StatsD"
-  //   reporter: {
-  //     type: "Prometheus",
-  //     options: {
-  //       // HTTP port
-  //       port: 3030,
-  //       // HTTP URL path
-  //       path: "/metrics",
-  //       // Default labels which are appended to all metrics labels
-  //       defaultLabels: (registry: MetricRegistry) => ({
-  //         namespace: registry.broker.namespace,
-  //         nodeID: registry.broker.nodeID,
-  //       }),
-  //     },
-  //   },
-  // },
+  metrics: {
+    enabled: true,
+    // Available built-in reporters: "Console", "CSV", "Event", "Prometheus", "Datadog", "StatsD"
+    reporter: {
+      type: "Prometheus",
+      options: {
+        // HTTP port
+        port: 3030,
+        // HTTP URL path
+        path: "/metrics",
+        // Default labels which are appended to all metrics labels
+        defaultLabels: (registry: MetricRegistry) => ({
+          namespace: registry.broker.namespace,
+          nodeID: registry.broker.nodeID,
+        }),
+      },
+    },
+  },
 
   // Enable built-in tracing function. More info: https://moleculer.services/docs/0.14/tracing.html
   // tracing: {

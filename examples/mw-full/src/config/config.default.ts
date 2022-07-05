@@ -36,5 +36,9 @@ export default (appInfo: MidwayAppInfo) => {
     // },
 
     [MoleculerConfigKey.config]: moleculerConf,
+
+    authMiddleware: {
+      whitelist: ["/metrics"],
+    },
   } as MidwayConfig;
 };

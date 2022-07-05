@@ -6,6 +6,7 @@ import * as jwt from "@midwayjs/jwt";
 import * as validate from "@midwayjs/validate";
 import * as redis from "@midwayjs/redis";
 import * as moleculer from "@dming/mwcloud-moleculer";
+import * as promethues from "@midwayjs/prometheus";
 
 import { Application } from "egg";
 import { join } from "path";
@@ -25,6 +26,7 @@ import { Service } from "moleculer";
       enabledEnvironment: ["local"],
     },
     moleculer,
+    promethues,
   ],
   importConfigs: [join(__dirname, "./config")],
 })

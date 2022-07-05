@@ -1,4 +1,4 @@
-import { Inject, Provide } from "@midwayjs/decorator";
+import { Inject, Provide, Config } from "@midwayjs/decorator";
 import { IMiddleware } from "@midwayjs/core";
 import {
   Context as WebContext,
@@ -22,12 +22,21 @@ export class AdminAuthMiddleware
   @Inject()
   jwtService: JwtService;
 
+  @Config("authMiddleware.whitelist")
+  whitelist: string[];
+
   //app?: IMidwayBaseApplication<WebContext>
   resolve() {
     return async (ctx: WebContext, next: WebNextFunction) => {
       const url = ctx.url;
       console.log("AdminAuthMiddleware url ", url);
+      let shouldIgnore = false;
       if (url.startsWith(`${ADMIN_PREFIX_URL}${NOAUTH_PREFIX_URL}`)) {
+        shouldIgnore = true;
+      } else if ((this.whitelist || []).includes(url)) {
+        shouldIgnore = true;
+      }
+      if (shouldIgnore) {
         console.warn("ignore auth url : ", url);
         await next();
         return;

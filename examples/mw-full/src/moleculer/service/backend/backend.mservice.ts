@@ -9,7 +9,11 @@ import { Action, Event, Method, Service } from "moleculer-decorators";
 export default class BackendMService extends MService {
   //   settings = {} as ServiceSettingSchema;
 
-  @Action()
+  @Action({
+    // params: {
+    //   name: { type: "string", min: 2 },// 参数验证 https://github.com/icebob/fastest-validator#readme
+    // },
+  })
   sayHello(ctx: Context): string {
     console.log(
       "<<< backend.mservice.ts  sayHello>>> ",

@@ -20,3 +20,13 @@ declare module "egg" {
     admin: Token;
   }
 }
+
+export interface AuthMiddlewareConfig {
+  whitelist: string[];
+}
+
+declare module "@midwayjs/core/dist/interface" {
+  interface MidwayConfig {
+    authMiddleware: AuthMiddlewareConfig;
+  }
+}
