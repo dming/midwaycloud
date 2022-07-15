@@ -1,0 +1,14 @@
+[
+  {
+    "_source": {
+      "@timestamp": "2022-07-15 16:40:04,701",
+      "message": "2022-07-15 16:40:04,701 INFO 82 <<<<<<<<<< onReady"
+    }
+  },
+  {
+    "_source": {
+      "@timestamp": "2022-07-16 16:40:04,701",
+      "message": "2022-07-15 16:40:04,707 WARN 82 Current logger will overwrite one already registered from Error\n    at DiagAPI.self.setLogger (/app/node_modules/.pnpm/registry.npmmirror.com+@opentelemetry+api@1.1.0/node_modules/@opentelemetry/api/src/api/diag.ts:87:23)\n    at ContainerLifeCycle.onReady (/app/examples/mw-full/src/configuration.ts:80:10)\n    at MidwayLifeCycleService.runContainerLifeCycle (/app/node_modules/.pnpm/registry.npmmirror.com+@midwayjs+core@3.3.6_@midwayjs+decorator@3.3.4/node_modules/@midwayjs/core/dist/service/lifeCycleService.js:88:67)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)\n    at async MidwayLifeCycleService.init (/app/node_modules/.pnpm/registry.npmmirror.com+@midwayjs+core@3.3.6_@midwayjs+decorator@3.3.4/node_modules/@midwayjs/core/dist/service/lifeCycleService.js:56:9)\n    at async ObjectCreator.doInitAsync (/app/node_modules/.pnpm/registry.npmmirror.com+@midwayjs+core@3.3.6_@midwayjs+decorator@3.3.4/node_modules/@midwayjs/core/dist/definitions/objectCreator.js:111:17)\n    at async ManagedResolverFactory.createAsync (/app/node_modules/.pnpm/registry.npmmirror.com+@midwayjs+core@3.3.6_@midwayjs+decorator@3.3.4/node_modules/@midwayjs/core/dist/context/managedResolverFactory.js:252:9)\n    at async initializeGlobalApplicationContext (/app/node_modules/.pnpm/registry.npmmirror.com+@midwayjs+core@3.3.6_@midwayjs+decorator@3.3.4/node_modules/@midwayjs/core/dist/setup.js:31:5)\n    at async create (/app/node_modules/.pnpm/registry.npmmirror.com+@midwayjs+mock@3.3.5/node_modules/@midwayjs/mock/dist/creator.js:66:5)\n    at async createApp (/app/node_modules/.pnpm/registry.npmmirror.com+@midwayjs+mock@3.3.5/node_modules/@midwayjs/mock/dist/creator.js:85:23)"
+    }
+  }
+]

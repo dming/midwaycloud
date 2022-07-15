@@ -11,4 +11,6 @@
 **/sql
 **/database
 __temp__
-*/__temp__
+
+docker/
+dming/

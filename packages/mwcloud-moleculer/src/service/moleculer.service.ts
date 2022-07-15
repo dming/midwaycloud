@@ -39,7 +39,7 @@ export class MoleculerService {
     this._broker = new ServiceBroker({
       namespace,
       nodeID: `${env}-${nodeType}-${nodeNum}-${
-        env === "local" ? "local" : cluster.worker.id
+        env === "local" ? "local" : cluster?.worker?.id ?? 0
       }`,
       ...this.moleculerConfig,
     });

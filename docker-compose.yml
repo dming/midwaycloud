@@ -88,13 +88,14 @@ services:
     image: nats:2
     ports:
       - "4222:4222"
-      - "6222:6222"
+      - "6322:6222"
       - "8222:8222"
     networks:
       - moleculer-net
 
   redis:
     image: redis:5.0.5
+    entrypoint: redis-server /etc/redis/myredis.conf
     volumes:
       - /d/redis/docker/myredis.conf:/etc/redis/myredis.conf:ro
       - /d/redis/docker/data:/data
@@ -126,6 +127,113 @@ services:
       - "3000:3000"
     networks:
       - moleculer-net
+    volumes:
+      - /d/grafana/docker/data:/var/lib/grafana
+
+  es:
+    image: elasticsearch:7.17.5
+    environment:
+      discovery.type: "single-node"
+      ES_JAVA_OPTS: "-Xms1g -Xmx1g"
+    volumes:
+      - ./docker/mw-full/elasticsearch/data:/usr/share/elasticsearch/data
+      - ./docker/mw-full/elasticsearch/conf/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - ./docker/mw-full/elasticsearch/plugins:/usr/share/elasticsearch/plugins
+    mem_limit: 2g
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    networks:
+      - moleculer-net
+
+  kibana:
+    image: kibana:7.17.5
+    depends_on:
+      - es
+    environment:
+      ELASTICSEARCH_URL: http://es:9200
+      ELASTICSEARCH_HOSTS: http://es:9200
+    volumes:
+      - ./docker/mw-full/kibana/conf/kibana.yml:/usr/share/kibana/config/kibana.yml
+      - ./docker/mw-full/kibana/data:/usr/share/kibana/data
+      - ./docker/mw-full/kibana/plugins:/usr/share/kibana/plugins
+    networks:
+      - moleculer-net
+    ports:
+      - 5601:5601
+
+  ja: # agent
+    image: jaegertracing/jaeger-agent:1.36
+    command:
+      - "--reporter.grpc.host-port=jc:14250"
+      - "--log-level=debug"
+    depends_on:
+      - jc
+    ports:
+      - 5775:5775/udp
+      - 6831:6831/udp
+      - 6832:6832/udp
+      - 5978:5778/tcp
+    networks:
+      - moleculer-net
+
+  jc: # collector
+    image: jaegertracing/jaeger-collector:1.36
+    environment:
+      SPAN_STORAGE_TYPE: elasticsearch
+      ES_SERVER_URLS: http://es:9200
+    command:
+      - "--log-level=debug"
+    depends_on:
+      - es
+    ports:
+      - 9411:9411
+      #因为14250被windows保留了，所以换一个端口，可以用 netsh interface ipv4 show excludedportrange protocol=tcp 命令查看，下次重启可能换保留端口
+      - 14350:14250
+      - 14368:14268
+      - 14369:14269
+    networks:
+      - moleculer-net
+
+  jq: #query
+    image: jaegertracing/jaeger-query:1.36
+    environment:
+      METRICS_STORAGE_TYPE: prometheus
+      SPAN_STORAGE_TYPE: elasticsearch
+      ES_SERVER_URLS: http://es:9200
+    depends_on:
+      - es
+    ports:
+      - 16685:16685
+      - 16686:16686
+      - 16687:16687
+    networks:
+      - moleculer-net
+
+  filebeat:
+    image: elastic/filebeat:7.17.5
+    # Need to override user so we can access the log files, and docker.sock
+    user: root
+    entrypoint: "filebeat -e -strict.perms=false"
+    environment:
+      - TZ=Asia/Shanghai
+      - ELASTICSEARCH_HOSTS=http://es:9200
+      # - KIBANA_HOST=${KIBANA_HOST:-node1}
+      # - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME:-elastic}
+      # - ELASTICSEARCH_PASSWORD=${ELASTICSEARCH_PASSWORD:-changeme}
+    depends_on:
+      - es
+      - kibana
+    volumes:
+      - ./docker/mw-full/filebeat/conf/filebeat.docker.yml:/usr/share/filebeat/filebeat.yml:ro
+      - ./docker/mw-full/filebeat/conf/custom/:/usr/share/filebeat/custom/
+      - ./docker/mw-full/filebeat/data/:/usr/share/filebeat/data/
+      - ./docker/mw-full/filebeat/logs/:/var/log/filebeat/
+      - /var/lib/docker/containers:/var/lib/docker/containers/:ro
+      - ./examples/mw-full/docker_logs/:/opt/logs/filebeat/
+      - /var/run/docker.sock:/var/run/docker.sock # for hint autodiscovery from docker label
+    networks:
+      - moleculer-net
 
   # traefik:
   #   image: traefik:v2.1
@@ -140,7 +248,6 @@ services:
   #     - /var/run/docker.sock:/var/run/docker.sock:ro
   #   networks:
   #     - moleculer-net
-  #     - default
 
 networks:
   moleculer-net:

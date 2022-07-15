@@ -29,7 +29,7 @@ const config: Omit<BrokerOptions, "nodeID"> = {
   },
   // Default log level for built-in console logger. It can be overwritten in logger options above.
   // Available values: trace, debug, info, warn, error, fatal
-  logLevel: "debug",
+  logLevel: "info",
 
   // Define transporter.
   // More info: https://moleculer.services/docs/0.14/networking.html
@@ -90,7 +90,50 @@ const config: Omit<BrokerOptions, "nodeID"> = {
 
   // Settings of Service Registry. More info: https://moleculer.services/docs/0.14/registry.html
   registry: {
-    discoverer: "redis://redis:6379",
+    //"redis://123456root@redis:6379",
+    discoverer: {
+      type: "Redis",
+      options: {
+        redis: {
+          // Redis connection options.
+          // More info: https://github.com/luin/ioredis#connect-to-redis
+          port: 6379,
+          host: "redis",
+          password: "123456root",
+          db: 3,
+        },
+
+        // Serializer
+        serializer: "JSON",
+
+        // Full heartbeat checks. It generates more network traffic
+        // 10 means every 10 cycle.
+        fullCheck: 10,
+
+        // Key scanning size
+        scanLength: 100,
+
+        // Monitoring Redis commands
+        monitor: true,
+
+        // --- COMMON DISCOVERER OPTIONS ---
+
+        // Send heartbeat in every 10 seconds
+        heartbeatInterval: 10,
+
+        // Heartbeat timeout in seconds
+        heartbeatTimeout: 30,
+
+        // Disable heartbeat checking & sending, if true
+        disableHeartbeatChecks: false,
+
+        // Disable removing offline nodes from registry, if true
+        disableOfflineNodeRemoving: false,
+
+        // Remove offline nodes after 10 minutes
+        cleanOfflineNodesTimeout: 10 * 60,
+      },
+    },
     // Define balancing strategy. More info: https://moleculer.services/docs/0.14/balancing.html
     // Available values: "RoundRobin", "Random", "CpuUsage", "Latency", "Shard"
     strategy: "RoundRobin",

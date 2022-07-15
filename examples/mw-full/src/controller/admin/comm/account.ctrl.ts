@@ -5,9 +5,11 @@ import {
   Inject,
   Query,
   ALL,
+  Logger,
 } from "@midwayjs/decorator";
 import { CreateApiDoc } from "@midwayjs/swagger";
 import { Validate } from "@midwayjs/validate";
+import { ILogger } from "@midwayjs/core";
 import { Context } from "egg";
 import { UserService } from "../../../service/user.service";
 import {
@@ -27,6 +29,9 @@ export class AdminAccountController {
   @Inject()
   userService: UserService;
 
+  @Logger()
+  logger: ILogger;
+
   @CreateApiDoc()
     .summary("获取管理员角色")
     .param("管理员登录信息参数")
@@ -38,13 +43,13 @@ export class AdminAccountController {
   @Validate()
   async getUserRoles(ctx: Context, @Query(ALL) query): Promise<RespResult> {
     const uid = ctx.admin?.uid;
-    console.debug("getUserRoles ", uid, query);
+    this.logger.debug("getUserRoles ", uid, query);
     if (!uid) {
       return Resp({ code: 1004 });
     }
     const user = await this.userService.getUserInfo(uid);
     if (user) {
-      console.debug("getUserRoles user", user);
+      this.logger.debug("getUserRoles user", user);
       return Resp({
         data: {
           roles: {

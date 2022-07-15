@@ -1,5 +1,5 @@
-import { Inject, Provide, Config } from "@midwayjs/decorator";
-import { IMiddleware } from "@midwayjs/core";
+import { Inject, Provide, Config, Logger } from "@midwayjs/decorator";
+import { IMiddleware, ILogger } from "@midwayjs/core";
 import {
   Context as WebContext,
   NextFunction as WebNextFunction,
@@ -25,11 +25,14 @@ export class AdminAuthMiddleware
   @Config("authMiddleware.whitelist")
   whitelist: string[];
 
+  @Logger()
+  logger: ILogger;
+
   //app?: IMidwayBaseApplication<WebContext>
   resolve() {
     return async (ctx: WebContext, next: WebNextFunction) => {
       const url = ctx.url;
-      console.log("AdminAuthMiddleware url ", url);
+      this.logger.debug("AdminAuthMiddleware url ", url);
       let shouldIgnore = false;
       if (url.startsWith(`${ADMIN_PREFIX_URL}${NOAUTH_PREFIX_URL}`)) {
         shouldIgnore = true;
@@ -37,14 +40,14 @@ export class AdminAuthMiddleware
         shouldIgnore = true;
       }
       if (shouldIgnore) {
-        console.warn("ignore auth url : ", url);
+        this.logger.debug("AdminAuthMiddleware ignore auth url : ", url);
         await next();
         return;
       }
 
       // const path = url.split("?")[0];
       const token = ctx.get("Authorization");
-      console.log("AdminAuthMiddleware token ", token);
+      this.logger.debug("AdminAuthMiddleware token ", token);
       if (isEmpty(token)) {
         // 无法通过token校验
         this.reject(ctx, { code: 11001 });
@@ -53,7 +56,7 @@ export class AdminAuthMiddleware
       try {
         // 挂载对象到当前请求上
         ctx.admin = this.jwtService.verifySync(token, {}) as Token;
-        console.log("verify token %s to payload %j", token, ctx.admin);
+        this.logger.debug("verify token %s to payload %j", token, ctx.admin);
       } catch (e) {
         // 无法通过token校验
         this.reject(ctx, { code: 11001 });

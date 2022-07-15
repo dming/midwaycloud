@@ -1,4 +1,5 @@
 logs/
+docker_logs/
 npm-debug.log
 yarn-error.log
 node_modules/
@@ -21,3 +22,4 @@ docs
 # pnpm-lock.yaml
 
 /__temp__
+/dming

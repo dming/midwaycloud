@@ -1,0 +1,66 @@
+// PUT _ingest/pipeline/mw-full-pipeline
+{
+  "description": "mw-full-pipeline for filebeat",
+  "processors": [
+    {
+      "set": {
+        "field": "event.ingested",
+        "value": "{{_ingest.timestamp}}"
+      }
+    },
+    {
+      "grok": {
+        "field": "message",
+        "patterns": [
+          "%{CATALINA8_DATESTAMP:winston.log.timestamp} %{LOGLEVEL:log.level} %{POSINT:winston.log.processid} (%{GREEDYMULTILINE:message}||%{GREEDYDATA:message})"
+        ],
+        "pattern_definitions": {
+          "MS": "\\d{3}",
+          "CATALINA8_DATESTAMP": "%{YEAR}-%{MONTHNUM}-%{MONTHDAY} %{HOUR}:%{MINUTE}:%{SECOND},%{MS}",
+          "GREEDYMULTILINE": "(.|\n)+"
+        },
+        "ignore_missing": true
+      }
+    },
+    {
+      "rename": {
+        "field": "@timestamp",
+        "target_field": "event.created"
+      }
+    },
+    {
+      "date": {
+        "field": "winston.log.timestamp",
+        "formats": ["yyyy-MM-dd H:m:s,SSS"],
+        "target_field": "@timestamp",
+        "ignore_failure": true
+      }
+    },
+    {
+      "set": {
+        "field": "event.kind",
+        "value": "event"
+      }
+    },
+    {
+      "append": {
+        "field": "event.category",
+        "value": "database"
+      }
+    },
+    {
+      "append": {
+        "field": "event.type",
+        "value": "info"
+      }
+    }
+  ],
+  "on_failure": [
+    {
+      "set": {
+        "field": "error.message",
+        "value": "{{ _ingest.on_failure_message }}"
+      }
+    }
+  ]
+}

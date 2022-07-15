@@ -15,7 +15,7 @@ export default class BackendMService extends MService {
     // },
   })
   sayHello(ctx: Context): string {
-    console.log(
+    this.logger.info(
       "<<< backend.mservice.ts  sayHello>>> ",
       ctx.id,
       ctx.nodeID,

@@ -6,8 +6,11 @@ import {
   Inject,
   Post,
   Provide,
+  Logger,
 } from "@midwayjs/decorator";
 import { JwtService } from "@midwayjs/jwt";
+import { Trace } from "@midwayjs/otel";
+import { ILogger } from "@midwayjs/core";
 import { CreateApiDoc } from "@midwayjs/swagger";
 import { Validate } from "@midwayjs/validate";
 import { isEmpty } from "lodash";
@@ -35,6 +38,9 @@ export class AdminLoginController {
   @Inject()
   moleculer: MoleculerService;
 
+  @Logger()
+  logger: ILogger;
+
   @CreateApiDoc()
     .summary("管理员登录")
     .param("管理员登录信息参数")
@@ -44,6 +50,7 @@ export class AdminLoginController {
     .build()
   @Post("/login")
   @Validate()
+  @Trace("user.login")
   async login(@Body(ALL) loginInfo: LoginInfoDto): Promise<RespResult> {
     const sign = await this.userService.getLoginSign(
       loginInfo.username,
@@ -52,9 +59,9 @@ export class AdminLoginController {
 
     try {
       const a = await this.moleculer.broker.call("backend.sayHello");
-      console.log("backend.sayhello >>>>>>>>> response is ", a);
+      this.logger.info("backend.sayhello >>>>>>>>> response is ", a);
     } catch (e) {
-      console.log(
+      this.logger.info(
         "what services is already registried:? ",
         this.moleculer.broker.registry.services.list({
           onlyLocal: false,
@@ -71,13 +78,13 @@ export class AdminLoginController {
       );
       // this.moleculer.broker
       //   .call("$node.list")
-      //   .then(res => console.log("moleculer services $node.list: ", res));
+      //   .then(res => this.logger.info("moleculer services $node.list: ", res));
       // this.moleculer.broker
       //   .call("$node.services")
-      //   .then(res => console.log("moleculer services $node.services: ", res));
+      //   .then(res => this.logger.info("moleculer services $node.services: ", res));
       // this.moleculer.broker
       //   .call("$node.actions")
-      //   .then(res => console.log("moleculer services $node.actions: ", res));
+      //   .then(res => this.logger.info("moleculer services $node.actions: ", res));
       throw e;
     }
 

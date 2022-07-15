@@ -1,0 +1,62 @@
+filebeat.config:
+  modules:
+    path: ${path.config}/modules.d/*.yml
+    reload.enabled: false
+
+# 用来自动发现其他docker container的log信息
+# filebeat.autodiscover:
+#   providers:
+#     - type: docker
+#       hints.enabled: true
+
+# processors:
+#   - add_cloud_metadata: ~
+
+logging.level: info # debug
+logging.to_files: true
+logging.files:
+  path: /var/log/filebeat/
+  name: filebeat.log
+  keepfiles: 7
+  permissions: 0640
+
+filebeat.inputs:
+  - type: log
+    enabled: true
+    symlinks: true
+    paths:
+      - /opt/logs/filebeat/**/*.log
+    multiline.type: pattern
+    multiline.pattern: "^[[:space:]]"
+    multiline.negate: false
+    multiline.match: after
+    processors:
+      - add_fields:
+          target: ""
+          fields:
+            ecs.version: 1.12.0
+  # - type: filestream # 以后要将log改为filestream，获得更好的性能及效果，但要注意迁移细节
+  #   enabled: true
+  #   id: mw-full-logs
+  #   paths:
+  #     - /opt/logs/filebeat/**/*.log
+
+output.elasticsearch:
+  hosts: "${ELASTICSEARCH_HOSTS:http://es:9200}"
+  index: "mw-full-logs-%{[agent.version]}-%{+yyyy.MM.dd}"
+  pipeline: "mw-full-pipeline"
+  # username: "${ELASTICSEARCH_USERNAME:}"
+  # password: "${ELASTICSEARCH_PASSWORD:}"
+  # pipeline: "my-pipeline-name" # 这里应该就是如何处理目标信息了吧
+
+setup:
+  kibana:
+    host: "http://kibana:5601"
+  dashboards.enabled: false
+  ilm.enabled: false # If index lifecycle management is enabled (which is typically the default), setup.template.name and setup.template.pattern are ignored.
+  template:
+    name: mw-full-logs
+    fields: ${path.config}/custom/custom.fields.yml
+    pattern: mw-full-logs-*
+    enabled: false
+    overwrite: false

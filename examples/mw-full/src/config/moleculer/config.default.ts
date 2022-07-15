@@ -5,7 +5,7 @@ const config: Omit<MoleculerConfig, "namespace"> = {
   transporter: "nats://127.0.0.1:4222",
   // transporter: "redis://127.0.0.1:6379",
   registry: {
-    discoverer: "redis://127.0.0.1:6379",
+    discoverer: "redis://123456root@127.0.0.1:6379",
     // Define balancing strategy. More info: https://moleculer.services/docs/0.14/balancing.html
     // Available values: "RoundRobin", "Random", "CpuUsage", "Latency", "Shard"
     strategy: "RoundRobin",
